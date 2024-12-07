@@ -1,0 +1,104 @@
+import { Directory, DirectoryParent } from "@/api";
+import { Anchor, Breadcrumbs, Group, Menu } from "@mantine/core";
+import { IconChevronRight, IconFolder } from "@tabler/icons-react";
+import { useMemo } from "react";
+
+const MAX_ITEMS = 3;
+
+interface BreadcrumbItem {
+  id: number;
+  title: string;
+  children?: BreadcrumbItem[];
+}
+
+export interface DirectoryBreadcrumbsProps {
+  directory: Directory | null;
+  isSearch: boolean;
+  onItemClick: (id: number) => void;
+}
+
+export function DirectoryBreadcrumbs({
+  directory,
+  isSearch,
+  onItemClick,
+}: DirectoryBreadcrumbsProps) {
+  const items = useMemo(() => {
+    if (isSearch)
+      return [
+        {
+          id: 0,
+          title: "Результаты поиска",
+        },
+      ];
+
+    if (!directory) return [];
+
+    let parent: DirectoryParent | null = directory.Parent;
+
+    const result: BreadcrumbItem[] = [
+      {
+        title: directory.Name,
+        id: directory.Id,
+      },
+    ];
+
+    while (parent) {
+      result.unshift({
+        title: parent.Name,
+        id: parent.Id,
+      });
+
+      parent = parent.Parent;
+    }
+
+    if (result.length > MAX_ITEMS) {
+      const children = result.splice(1, result.length - MAX_ITEMS);
+      result.splice(1, 0, { id: 0, title: "...", children });
+    }
+
+    return result;
+  }, [directory, isSearch]);
+
+  return (
+    <Group h={48} py={8} px="lg" styles={{ root: { flexShrink: 0 } }}>
+      <Breadcrumbs
+        separatorMargin={6}
+        separator={<IconChevronRight stroke={1.2} size={17} />}
+      >
+        {items.map((item, index) =>
+          item.children ? (
+            <Menu key={index}>
+              <Menu.Target>
+                <Anchor c="dimmed">...</Anchor>
+              </Menu.Target>
+              <Menu.Dropdown>
+                {item.children.map((item) => (
+                  <Menu.Item
+                    key={item.id}
+                    c="dark"
+                    fz="sm"
+                    leftSection={<IconFolder stroke={1.2} size={18} />}
+                  >
+                    {item.title}
+                  </Menu.Item>
+                ))}
+              </Menu.Dropdown>
+            </Menu>
+          ) : (
+            <Anchor
+              key={index}
+              truncate
+              underline={item.id !== 0 ? "hover" : "never"}
+              c={index === items.length - 1 ? "dark" : "dimmed"}
+              fw={index === items.length - 1 ? 500 : 400}
+              maw={200}
+              onClick={item.id === 0 ? undefined : () => onItemClick(item.id)}
+            >
+              {item.title}
+            </Anchor>
+          )
+        )}
+      </Breadcrumbs>
+    </Group>
+  );
+}
