@@ -1088,7 +1088,7 @@ function y2({
 }
 var Q1 = /* @__PURE__ */ ((r) => (r[r.Docs = 16] = "Docs", r))(Q1 || {}), m1 = /* @__PURE__ */ ((r) => (r[r.Id = 0] = "Id", r[r.Name = 1] = "Name", r[r.Type = 2] = "Type", r[r.Size = 3] = "Size", r[r.Author = 4] = "Author", r[r.Date = 5] = "Date", r[r.UpdateDate = 6] = "UpdateDate", r))(m1 || {}), v1 = /* @__PURE__ */ ((r) => (r[r.Asc = 0] = "Asc", r[r.Desc = 1] = "Desc", r))(v1 || {});
 const ee = ze.create({
-  baseURL: "https://drive-app.r7-office.ru/api"
+  baseURL: "/api"
 }), q1 = (r) => ee.get("v1/DocumentDirectory/Get", { params: r }), w2 = (r) => ee.get("v1/DocumentDirectory/Search", {
   params: { ...r, field: "All" }
 });
