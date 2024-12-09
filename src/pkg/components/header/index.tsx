@@ -6,9 +6,10 @@ import LogoDriveFull from "@/icons/logo-drive-full.svg?react";
 
 export interface HeaderProps {
   onSearch: (value: string) => void;
+  onClose: () => void;
 }
 
-export function Header({ onSearch }: HeaderProps) {
+export function Header({ onSearch, onClose }: HeaderProps) {
   const [searchValue, setSearchValue] = useState("");
 
   return (
@@ -42,7 +43,13 @@ export function Header({ onSearch }: HeaderProps) {
           event.key === "Enter" && onSearch(searchValue.trim())
         }
       />
-      <ActionIcon variant="subtle" color="gray" ml="auto" size="lg">
+      <ActionIcon
+        variant="subtle"
+        color="gray"
+        ml="auto"
+        size="lg"
+        onClick={onClose}
+      >
         <IconX size={25} stroke={1.2} />
       </ActionIcon>
     </Group>

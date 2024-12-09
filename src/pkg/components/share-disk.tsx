@@ -17,13 +17,27 @@ import {
 } from "../api";
 import { SelectionInfo } from "./selection-info";
 
-export function Root() {
+const defaultRequestParams = {
+  id: "",
+  sortField: DocumentDirectorySortField.Id,
+  sortOrder: DocumentDirectorySortOrder.Desc,
+};
+
+export interface ShareDiskProps {
+  opened: boolean;
+  onClose: () => void;
+  onAttachFiles: () => void;
+  onCreateLink: () => void;
+}
+
+export function ShareDisk({
+  opened,
+  onClose,
+  onAttachFiles,
+  onCreateLink,
+}: ShareDiskProps) {
   const [requestParams, setRequestParams] =
-    useState<DocumentDirectoryRequestParams>({
-      id: "",
-      sortField: DocumentDirectorySortField.Id,
-      sortOrder: DocumentDirectorySortOrder.Desc,
-    });
+    useState<DocumentDirectoryRequestParams>(defaultRequestParams);
 
   const [directory, setDirectory] = useState<Directory | null>(null);
   const [searchData, setSearchData] =
@@ -59,38 +73,47 @@ export function Root() {
   };
 
   useEffect(() => {
-    const load = async () => {
-      const response = await getDirectory();
-      const docsId = response.data.find(
-        (item) => item.Type === DocumentDirectoryType.Docs
-      )!.Id;
+    if (opened) {
+      const load = async () => {
+        const response = await getDirectory();
+        const docsId = response.data.find(
+          (item) => item.Type === DocumentDirectoryType.Docs
+        )!.Id;
 
-      const newRequestParams = {
-        id: docsId,
-        sortField: DocumentDirectorySortField.Id,
-        sortOrder: DocumentDirectorySortOrder.Desc,
+        const newRequestParams = {
+          id: docsId,
+          sortField: DocumentDirectorySortField.Id,
+          sortOrder: DocumentDirectorySortOrder.Desc,
+        };
+
+        setRequestParams(newRequestParams);
+
+        fetchDirectory(newRequestParams);
       };
 
-      setRequestParams(newRequestParams);
+      load();
 
-      fetchDirectory(newRequestParams);
-    };
-
-    load();
-  }, [fetchDirectory]);
+      return () => {
+        setRequestParams(defaultRequestParams);
+        setDirectory(null);
+        setSearchData(null);
+        setSelectedRowIds([]);
+      };
+    }
+  }, [opened, fetchDirectory]);
 
   return (
     <Modal
       centered
       withCloseButton={false}
-      opened
+      opened={opened}
       size={760}
       radius="lg"
       padding={0}
       onClose={() => {}}
     >
       <Box h={500} pos="relative">
-        <Header onSearch={handleSearch} />
+        <Header onSearch={handleSearch} onClose={onClose} />
         <DirectoryBreadcrumbs
           directory={directory}
           isSearch={!!searchData}
@@ -108,6 +131,14 @@ export function Root() {
           <SelectionInfo
             count={selectedRowIds.length}
             onClose={() => setSelectedRowIds([])}
+            onAttachFiles={() => {
+              onAttachFiles();
+              onClose();
+            }}
+            onCreateLink={() => {
+              onCreateLink();
+              onClose();
+            }}
           />
         )}
       </Box>

@@ -4,9 +4,16 @@ import { IconInfoCircle, IconX } from "@tabler/icons-react";
 export interface SelectionInfoProps {
   count: number;
   onClose: () => void;
+  onAttachFiles: () => void;
+  onCreateLink: () => void;
 }
 
-export function SelectionInfo({ count, onClose }: SelectionInfoProps) {
+export function SelectionInfo({
+  count,
+  onClose,
+  onAttachFiles,
+  onCreateLink,
+}: SelectionInfoProps) {
   return (
     <Group
       bg="blue"
@@ -23,10 +30,12 @@ export function SelectionInfo({ count, onClose }: SelectionInfoProps) {
       </ActionIcon>
       <Text>Выбрано: {count}</Text>
       <Group gap="xs" ml="auto">
-        <Button variant="outline" color="#fff">
+        <Button variant="outline" color="#fff" onClick={() => onAttachFiles()}>
           Прикрепить файл
         </Button>
-        <Button variant="default">Добавить ссылку</Button>
+        <Button variant="default" onClick={() => onCreateLink()}>
+          Добавить ссылку
+        </Button>
       </Group>
       <IconInfoCircle />
     </Group>
