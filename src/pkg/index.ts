@@ -1,1 +1,1 @@
-export * from "./components/share-disk";
+export { ShareDisk } from "./components/share-disk";
