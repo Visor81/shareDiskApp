@@ -30,10 +30,10 @@ export function SelectionInfo({
       </ActionIcon>
       <Text>Выбрано: {count}</Text>
       <Group gap="xs" ml="auto">
-        <Button variant="outline" color="#fff" onClick={() => onAttachFiles()}>
+        <Button variant="outline" color="#fff" onClick={onAttachFiles}>
           Прикрепить файл
         </Button>
-        <Button variant="default" onClick={() => onCreateLink()}>
+        <Button variant="default" onClick={onCreateLink}>
           Добавить ссылку
         </Button>
       </Group>
