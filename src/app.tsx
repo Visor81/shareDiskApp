@@ -1,4 +1,4 @@
-import { Button, MantineProvider, Stack } from "@mantine/core";
+import { Button, Stack } from "@mantine/core";
 
 import "@mantine/core/styles.css";
 
@@ -9,7 +9,7 @@ export function App() {
   const [opened, setOpened] = useState(false);
 
   return (
-    <MantineProvider>
+    <>
       <Stack align="center" justify="center" h="100vh">
         <Button onClick={() => setOpened(true)}>Open share disk</Button>
       </Stack>
@@ -19,6 +19,6 @@ export function App() {
         onAttachFiles={() => console.log("Attach files")}
         onCreateLink={() => console.log("Create link")}
       />
-    </MantineProvider>
+    </>
   );
 }

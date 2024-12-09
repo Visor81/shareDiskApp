@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { Box, Modal } from "@mantine/core";
+import { Box, MantineProvider, Modal } from "@mantine/core";
 import { Header } from "./header";
 import { DirectoryTable } from "./directory-table";
 import { DirectoryBreadcrumbs } from "./directory-breadcrumbs";
@@ -103,45 +103,47 @@ export function ShareDisk({
   }, [opened, fetchDirectory]);
 
   return (
-    <Modal
-      centered
-      withCloseButton={false}
-      opened={opened}
-      size={760}
-      radius="lg"
-      padding={0}
-      onClose={() => {}}
-    >
-      <Box h={500} pos="relative">
-        <Header onSearch={handleSearch} onClose={onClose} />
-        <DirectoryBreadcrumbs
-          directory={directory}
-          isSearch={!!searchData}
-          onItemClick={(id) => fetchDirectory({ ...requestParams, id })}
-        />
-        <Box h="calc(100% - 64px - 48px)">
-          <DirectoryTable
-            rows={rows}
-            selectedRowIds={selectedRowIds}
-            onOpenDir={(id) => fetchDirectory({ ...requestParams, id })}
-            onSelect={(ids) => setSelectedRowIds(ids)}
+    <MantineProvider>
+      <Modal
+        centered
+        withCloseButton={false}
+        opened={opened}
+        size={760}
+        radius="lg"
+        padding={0}
+        onClose={() => {}}
+      >
+        <Box h={500} pos="relative">
+          <Header onSearch={handleSearch} onClose={onClose} />
+          <DirectoryBreadcrumbs
+            directory={directory}
+            isSearch={!!searchData}
+            onItemClick={(id) => fetchDirectory({ ...requestParams, id })}
           />
+          <Box h="calc(100% - 64px - 48px)">
+            <DirectoryTable
+              rows={rows}
+              selectedRowIds={selectedRowIds}
+              onOpenDir={(id) => fetchDirectory({ ...requestParams, id })}
+              onSelect={(ids) => setSelectedRowIds(ids)}
+            />
+          </Box>
+          {!!selectedRowIds.length && (
+            <SelectionInfo
+              count={selectedRowIds.length}
+              onClose={() => setSelectedRowIds([])}
+              onAttachFiles={() => {
+                onAttachFiles();
+                onClose();
+              }}
+              onCreateLink={() => {
+                onCreateLink();
+                onClose();
+              }}
+            />
+          )}
         </Box>
-        {!!selectedRowIds.length && (
-          <SelectionInfo
-            count={selectedRowIds.length}
-            onClose={() => setSelectedRowIds([])}
-            onAttachFiles={() => {
-              onAttachFiles();
-              onClose();
-            }}
-            onCreateLink={() => {
-              onCreateLink();
-              onClose();
-            }}
-          />
-        )}
-      </Box>
-    </Modal>
+      </Modal>
+    </MantineProvider>
   );
 }
