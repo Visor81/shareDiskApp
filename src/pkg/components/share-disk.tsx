@@ -102,6 +102,7 @@ export function ShareDisk({
       setSelectedRowIds([]);
 
       onAttachFiles(files);
+      onClose();
     } catch (error) {
       if (isAxiosError(error)) {
         console.error(

@@ -1164,7 +1164,7 @@ function j2({
           type: D.headers["content-type"] ?? f[X].MimeType
         })
       );
-      E([]), w(W);
+      E([]), w(W), d();
     } catch (M) {
       Ne(M) && console.error(
         ((N = (P = M.response) == null ? void 0 : P.data) == null ? void 0 : N.ErrorMessage) ?? "Неизвестная ошибка"
