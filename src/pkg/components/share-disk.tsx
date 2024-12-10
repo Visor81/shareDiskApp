@@ -173,7 +173,7 @@ export function ShareDisk({
           </Box>
           {!!selectedRowIds.length && (
             <SelectionInfo
-              count={rows.length}
+              count={selectedRowIds.length}
               onClose={() => setSelectedRowIds([])}
               onAttachFiles={handleAttachFiles}
               onCreateLink={() => {
