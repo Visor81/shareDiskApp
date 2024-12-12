@@ -7,10 +7,11 @@
     "dist"
   ],
   "main": "./dist/share-disk.umd.cjs",
-  "module": "./dist/share-disk.js",
+  "module": "./dist/share-disk.es.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/share-disk.js",
+      "import": "./dist/share-disk.es.js",
       "require": "./dist/share-disk.umd.cjs"
     }
   },
