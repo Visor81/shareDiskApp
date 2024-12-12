@@ -10,7 +10,8 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "src/pkg/index.ts"),
       name: "ShareDisk",
-      fileName: "share-disk",
+      formats: ["es", "umd"],
+      fileName: (format) => `share-disk.${format}.js`,
     },
     rollupOptions: {
       external: [
