@@ -8,7 +8,7 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, "src/pkg/index.ts"),
+      entry: resolve(__dirname, "src/entry.ts"),
       name: "ShareDisk",
       formats: ["es", "umd"],
       fileName: (format) => `share-disk.${format}.js`,
@@ -31,8 +31,12 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src/pkg"),
+      "@": resolve(__dirname, "src"),
     },
   },
-  plugins: [react(), svgr(), dts({ tsconfigPath: "./tsconfig.app.json" })],
+  plugins: [
+    react(),
+    svgr(),
+    dts({ insertTypesEntry: true, tsconfigPath: "./tsconfig.app.json" }),
+  ],
 });

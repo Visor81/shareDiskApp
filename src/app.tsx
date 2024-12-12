@@ -2,7 +2,7 @@ import { Button, MantineProvider, Stack } from "@mantine/core";
 
 import "@mantine/core/styles.css";
 
-import { ShareDisk } from "./pkg/components/share-disk";
+import { ShareDisk } from "./components/share-disk";
 import { useState } from "react";
 
 export function App() {
