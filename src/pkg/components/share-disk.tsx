@@ -49,7 +49,7 @@ export function ShareDisk({
 
   const [selectedRowIds, setSelectedRowIds] = useState<number[]>([]);
 
-  const [attachLoading, setAttachLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const rows = useMemo(() => {
     if (searchData) {
@@ -61,9 +61,15 @@ export function ShareDisk({
 
   const fetchDirectory = useCallback(
     async (params: DocumentDirectoryRequestParams) => {
-      const { data } = await getDirectory(params);
-      setDirectory(data[0]);
-      setSearchData(null);
+      setIsLoading(true);
+
+      try {
+        const { data } = await getDirectory(params);
+        setDirectory(data[0]);
+        setSearchData(null);
+      } finally {
+        setIsLoading(false);
+      }
     },
     []
   );
@@ -72,14 +78,19 @@ export function ShareDisk({
     if (!text) {
       fetchDirectory(requestParams);
     } else {
-      const { data } = await search({ text });
-      setSearchData(data);
-      setDirectory(null);
+      setIsLoading(true);
+      try {
+        const { data } = await search({ text });
+        setSearchData(data);
+        setDirectory(null);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   const handleAttachFiles = async () => {
-    setAttachLoading(true);
+    setIsLoading(true);
 
     const docs = rows.filter((row) =>
       selectedRowIds.includes(row.Id)
@@ -110,7 +121,7 @@ export function ShareDisk({
         );
       }
     } finally {
-      setAttachLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -156,7 +167,7 @@ export function ShareDisk({
         onClose={() => {}}
       >
         <Box h={500} pos="relative">
-          <LoadingOverlay visible={attachLoading} />
+          <LoadingOverlay visible={isLoading} />
           <Header onSearch={handleSearch} onClose={onClose} />
           <DirectoryBreadcrumbs
             directory={directory}
