@@ -1,6 +1,6 @@
 import { Directory, DirectoryParent } from "@/api";
-import { Anchor, Breadcrumbs, Group, Menu } from "@mantine/core";
-import { IconChevronRight, IconFolder } from "@tabler/icons-react";
+import { ActionIcon, Anchor, Breadcrumbs, Group, Menu } from "@mantine/core";
+import { IconArrowUp, IconChevronRight, IconFolder } from "@tabler/icons-react";
 import { useMemo } from "react";
 
 const MAX_ITEMS = 3;
@@ -14,12 +14,14 @@ interface BreadcrumbItem {
 export interface DirectoryBreadcrumbsProps {
   directory: Directory | null;
   isSearch: boolean;
+  onBack: () => void;
   onItemClick: (id: number) => void;
 }
 
 export function DirectoryBreadcrumbs({
   directory,
   isSearch,
+  onBack,
   onItemClick,
 }: DirectoryBreadcrumbsProps) {
   const items = useMemo(() => {
@@ -61,6 +63,17 @@ export function DirectoryBreadcrumbs({
 
   return (
     <Group h={48} py={8} px="lg" styles={{ root: { flexShrink: 0 } }}>
+      {items.length > 1 && (
+        <ActionIcon
+          variant="subtle"
+          color="dimmed"
+          size="sm"
+          ml={-2}
+          onClick={onBack}
+        >
+          <IconArrowUp stroke={1.2} size={16} />
+        </ActionIcon>
+      )}
       <Breadcrumbs
         separatorMargin={6}
         separator={<IconChevronRight stroke={1.2} size={17} />}

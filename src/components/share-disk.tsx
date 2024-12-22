@@ -186,6 +186,12 @@ export function ShareDisk({
           <DirectoryBreadcrumbs
             directory={directory}
             isSearch={!!searchData}
+            onBack={() =>
+              fetchDirectory({
+                ...requestParams,
+                id: directory!.ParentId as number,
+              })
+            }
             onItemClick={(id) => fetchDirectory({ ...requestParams, id })}
           />
           <Box
