@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-
 import { Box, LoadingOverlay, MantineProvider, Modal } from "@mantine/core";
+import { isAxiosError } from "axios";
+
 import { Header } from "./header";
 import { DirectoryTable } from "./directory-table";
 import { DirectoryBreadcrumbs } from "./directory-breadcrumbs";
@@ -18,8 +19,9 @@ import {
 } from "../api";
 import { SelectionInfo } from "./selection-info";
 
-import { isAxiosError } from "axios";
 import { http } from "@/network";
+import { MAX_SIZE_ATTACHMENTS } from "@/config";
+import { formatBytes } from "@/lib/format-bytes";
 
 const defaultRequestParams = {
   id: "",
@@ -58,6 +60,18 @@ export function ShareDisk({
 
     return [...(directory?.Children ?? []), ...(directory?.Documents ?? [])];
   }, [directory, searchData]);
+
+  const selectedRows = useMemo(
+    () => rows.filter((item) => selectedRowIds.includes(item.Id)),
+    [rows, selectedRowIds]
+  );
+
+  const selectedRowsSize = useMemo(
+    () => selectedRows.reduce((acc, item) => acc + item.Size, 0),
+    [selectedRows]
+  );
+
+  const isLimitExceeded = selectedRowsSize > MAX_SIZE_ATTACHMENTS;
 
   const fetchDirectory = useCallback(
     async (params: DocumentDirectoryRequestParams) => {
@@ -156,17 +170,17 @@ export function ShareDisk({
   }, [opened, fetchDirectory]);
 
   return (
-    <MantineProvider>
+    <MantineProvider theme={{ fontFamily: "Roboto, sans-serif" }}>
       <Modal
         centered
         withCloseButton={false}
         opened={opened}
-        size={760}
+        size={950}
         radius="lg"
         padding={0}
         onClose={() => {}}
       >
-        <Box h={500} pos="relative">
+        <Box h={590} pos="relative">
           <LoadingOverlay visible={isLoading} />
           <Header onSearch={handleSearch} onClose={onClose} />
           <DirectoryBreadcrumbs
@@ -174,7 +188,14 @@ export function ShareDisk({
             isSearch={!!searchData}
             onItemClick={(id) => fetchDirectory({ ...requestParams, id })}
           />
-          <Box h="calc(100% - 64px - 48px)">
+          <Box
+            data-aaaaaaaaa
+            style={{
+              height: `calc(100% - 48px - 64px - ${
+                selectedRowIds.length ? 76 : 0
+              }px - ${isLimitExceeded ? 41 : 0}px)`,
+            }}
+          >
             <DirectoryTable
               rows={rows}
               selectedRowIds={selectedRowIds}
@@ -185,6 +206,8 @@ export function ShareDisk({
           {!!selectedRowIds.length && (
             <SelectionInfo
               count={selectedRowIds.length}
+              size={formatBytes(selectedRowsSize)}
+              isLimitExceeded={isLimitExceeded}
               onClose={() => setSelectedRowIds([])}
               onAttachFiles={handleAttachFiles}
               onCreateLink={() => {

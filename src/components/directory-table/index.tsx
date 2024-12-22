@@ -38,10 +38,15 @@ export function DirectoryTable({
 
   return (
     <Table.ScrollContainer minWidth={760} h="100%">
-      <Table stickyHeader verticalSpacing="xs" horizontalSpacing="lg">
+      <Table
+        stickyHeader
+        verticalSpacing="xs"
+        horizontalSpacing="lg"
+        styles={{ tr: { height: 40 } }}
+      >
         <Table.Thead>
           <Table.Tr>
-            <Table.Th c="gray.6" fw={500} fz="xs" tt="uppercase">
+            <Table.Th c="gray.6" fw={500} fz={10} tt="uppercase">
               <Group gap="xs">
                 <Checkbox
                   size="xs"
@@ -52,10 +57,10 @@ export function DirectoryTable({
                 Название
               </Group>
             </Table.Th>
-            <Table.Th c="gray.6" fw={500} fz="xs" tt="uppercase">
+            <Table.Th c="gray.6" fw={500} fz={10} tt="uppercase">
               Изменен
             </Table.Th>
-            <Table.Th c="gray.6" fw={500} fz="xs" tt="uppercase">
+            <Table.Th c="gray.6" fw={500} fz={10} tt="uppercase">
               Размер
             </Table.Th>
           </Table.Tr>
@@ -72,7 +77,7 @@ export function DirectoryTable({
                 "MimeType" in row ? () => handleRowSelect(row.Id) : undefined
               }
             >
-              <Table.Td fz="sm">
+              <Table.Td fz={13}>
                 <Group gap="xs">
                   <Box h={16} w={16}>
                     {"MimeType" in row && (
@@ -89,7 +94,13 @@ export function DirectoryTable({
                       mimeType={"MimeType" in row ? row.MimeType : ""}
                     />
                     {"MimeType" in row ? (
-                      <Text truncate c="gray.8" title={row.Name} maw={340}>
+                      <Text
+                        fz={13}
+                        truncate
+                        c="gray.8"
+                        title={row.Name}
+                        maw={340}
+                      >
                         {row.Name}
                       </Text>
                     ) : (
@@ -97,6 +108,7 @@ export function DirectoryTable({
                         truncate
                         c="gray.8"
                         title={row.Name}
+                        fz={13}
                         fw={500}
                         maw={340}
                         onMouseDown={(event) => event.stopPropagation()}
@@ -108,12 +120,12 @@ export function DirectoryTable({
                   </Group>
                 </Group>
               </Table.Td>
-              <Table.Td fz="sm" c="dimmed">
+              <Table.Td fz={12} c="dimmed">
                 <span title={new Date(row.Timestamp).toLocaleString("ru-Ru")}>
                   {new Date(row.Timestamp).toLocaleString("ru-Ru")}
                 </span>
               </Table.Td>
-              <Table.Td fz="sm" c="dimmed">
+              <Table.Td fz={12} c="dimmed">
                 {"Size" in row
                   ? isNaN(+row.Size)
                     ? null

@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Button, MantineProvider, Stack } from "@mantine/core";
 
 import "@mantine/core/styles.css";
 
 import { ShareDisk } from "./components/share-disk";
-import { useState } from "react";
+
+import "@/fonts/fonts.css";
 
 export function App() {
   const [opened, setOpened] = useState(false);

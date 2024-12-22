@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ActionIcon, Group, TextInput } from "@mantine/core";
+import { ActionIcon, Button, Group, TextInput } from "@mantine/core";
 import { IconSearch, IconX } from "@tabler/icons-react";
 
 import LogoDriveFull from "@/icons/logo-drive-full.svg?react";
@@ -20,22 +20,35 @@ export function Header({ onSearch, onClose }: HeaderProps) {
       <TextInput
         variant="filled"
         size="md"
+        fz={16}
         w={480}
         placeholder="Поиск"
         value={searchValue}
         leftSection={<IconSearch stroke={1.2} />}
+        rightSectionProps={{ style: { width: 110 } }}
         rightSection={
           !!searchValue && (
-            <ActionIcon
-              variant="transparent"
-              color="gray"
-              onClick={() => {
-                setSearchValue("");
-                onSearch("");
-              }}
-            >
-              <IconX stroke={1.2} />
-            </ActionIcon>
+            <Group gap="xs">
+              <ActionIcon
+                variant="transparent"
+                color="gray"
+                onClick={() => {
+                  setSearchValue("");
+                  onSearch("");
+                }}
+              >
+                <IconX stroke={1.2} size={22} />
+              </ActionIcon>
+              <Button
+                variant="default"
+                size="xs"
+                bd="none"
+                fz={12}
+                onClick={() => onSearch(searchValue.trim())}
+              >
+                Найти
+              </Button>
+            </Group>
           )
         }
         onChange={(event) => setSearchValue(event.currentTarget.value)}

@@ -69,14 +69,16 @@ export function DirectoryBreadcrumbs({
           item.children ? (
             <Menu key={index}>
               <Menu.Target>
-                <Anchor c="dimmed">...</Anchor>
+                <Anchor c="dimmed" fz={14}>
+                  ...
+                </Anchor>
               </Menu.Target>
               <Menu.Dropdown>
                 {item.children.map((item) => (
                   <Menu.Item
                     key={item.id}
                     c="dark"
-                    fz="sm"
+                    fz={14}
                     leftSection={<IconFolder stroke={1.2} size={18} />}
                   >
                     {item.title}
@@ -90,6 +92,7 @@ export function DirectoryBreadcrumbs({
               truncate
               underline={item.id !== 0 ? "hover" : "never"}
               c={index === items.length - 1 ? "dark" : "dimmed"}
+              fz={14}
               fw={index === items.length - 1 ? 500 : 400}
               maw={200}
               onClick={item.id === 0 ? undefined : () => onItemClick(item.id)}

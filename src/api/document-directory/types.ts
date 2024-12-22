@@ -55,6 +55,7 @@ export interface Directory {
   Timestamp: string;
   OwnerId: number;
   IsShared: boolean;
+  Size: number;
   UserName: string | null;
   UserAvatar: string | null;
   UserInitials: string | null;
