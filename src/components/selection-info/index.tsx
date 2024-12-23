@@ -2,6 +2,7 @@ import { ActionIcon, Button, Group, Text } from "@mantine/core";
 import { IconInfoCircle, IconX } from "@tabler/icons-react";
 
 export interface SelectionInfoProps {
+  enabledLinks: boolean;
   count: number;
   size: string;
   isLimitExceeded: boolean;
@@ -11,6 +12,7 @@ export interface SelectionInfoProps {
 }
 
 export function SelectionInfo({
+  enabledLinks,
   count,
   size,
   isLimitExceeded,
@@ -56,9 +58,11 @@ export function SelectionInfo({
           >
             Прикрепить файл
           </Button>
-          <Button variant="default" onClick={onCreateLink}>
-            Добавить ссылки
-          </Button>
+          {enabledLinks && (
+            <Button variant="default" onClick={onCreateLink}>
+              Добавить ссылки
+            </Button>
+          )}
         </Group>
         <IconInfoCircle />
       </Group>

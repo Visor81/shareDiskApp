@@ -31,6 +31,7 @@ const defaultRequestParams = {
 
 export interface ShareDiskProps {
   opened: boolean;
+  enabledLinks?: boolean;
   onClose: () => void;
   onAttachFiles: (files: File[]) => void;
   onCreateLink: () => void;
@@ -38,6 +39,7 @@ export interface ShareDiskProps {
 
 export function ShareDisk({
   opened,
+  enabledLinks = false,
   onClose,
   onAttachFiles,
   onCreateLink,
@@ -195,7 +197,6 @@ export function ShareDisk({
             onItemClick={(id) => fetchDirectory({ ...requestParams, id })}
           />
           <Box
-            data-aaaaaaaaa
             style={{
               height: `calc(100% - 48px - 64px - ${
                 selectedRowIds.length ? 76 : 0
@@ -211,6 +212,7 @@ export function ShareDisk({
           </Box>
           {!!selectedRowIds.length && (
             <SelectionInfo
+              enabledLinks={enabledLinks}
               count={selectedRowIds.length}
               size={formatBytes(selectedRowsSize)}
               isLimitExceeded={isLimitExceeded}
