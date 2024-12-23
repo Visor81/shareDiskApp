@@ -1,5 +1,5 @@
 import { ActionIcon, Button, Group, Text } from "@mantine/core";
-import { IconInfoCircle, IconX } from "@tabler/icons-react";
+import { IconX } from "@tabler/icons-react";
 
 export interface SelectionInfoProps {
   enabledLinks: boolean;
@@ -64,7 +64,6 @@ export function SelectionInfo({
             </Button>
           )}
         </Group>
-        <IconInfoCircle />
       </Group>
     </>
   );
