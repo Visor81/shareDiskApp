@@ -157,7 +157,7 @@ export function ShareDisk({
             id: row.Id,
             accessType: AccessType.Read,
             lifeTime: LinkLifeTimeType.Unlimited,
-            type: "MimeType" in row ? "Document" : "Directory",
+            type: "Document",
           })
         )
       );
