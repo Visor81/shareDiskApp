@@ -20,7 +20,7 @@ export function DirectoryTable({
   onOpenDir,
   onSelect,
 }: DirectoryTableProps) {
-  const isAllChecked = rows.length === selectedRowIds.length;
+  const isAllChecked = !!rows.length && rows.length === selectedRowIds.length;
 
   const isIndeterminate = !isAllChecked && !!selectedRowIds.length;
 

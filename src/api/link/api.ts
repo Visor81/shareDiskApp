@@ -1,7 +1,7 @@
 import { http } from "@/network";
-import { LinkRequestParams } from "./types";
+import { GenerateLinkRequestParams, GenerateLinkResponse } from "./types";
 
-export const link = (requestParams: LinkRequestParams) => {
+export const link = (requestParams: GenerateLinkRequestParams) => {
   const params = Object.fromEntries(
     Object.entries({
       ...requestParams,
@@ -11,5 +11,5 @@ export const link = (requestParams: LinkRequestParams) => {
     }).filter((item) => item[1] !== undefined)
   );
 
-  return http.get("v1/Link/Generate", { params });
+  return http.get<GenerateLinkResponse>("v1/Link/Generate", { params });
 };

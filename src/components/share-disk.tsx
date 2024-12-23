@@ -25,6 +25,7 @@ import { formatBytes } from "@/lib/format-bytes";
 import { link } from "@/api/link";
 import { AccessType } from "@/enums";
 import { LinkLifeTimeType } from "@/api/link/enums";
+import { GenerateLinkResponse } from "@/api/link/types";
 
 const defaultRequestParams = {
   id: "",
@@ -37,7 +38,7 @@ export interface ShareDiskProps {
   enabledLinks?: boolean;
   onClose: () => void;
   onAttachFiles: (files: File[]) => void;
-  onCreateLink: () => void;
+  onCreateLink: (items: GenerateLinkResponse[]) => void;
 }
 
 export function ShareDisk({
@@ -151,7 +152,7 @@ export function ShareDisk({
     setIsLoading(true);
 
     try {
-      const links = await Promise.all(
+      const response = await Promise.all(
         selectedRows.map((row) =>
           link({
             id: row.Id,
@@ -162,9 +163,7 @@ export function ShareDisk({
         )
       );
 
-      console.log(links);
-
-      onCreateLink();
+      onCreateLink(response.map((item) => item.data));
       onClose();
     } finally {
       setIsLoading(false);
