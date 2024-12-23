@@ -22,6 +22,9 @@ import { SelectionInfo } from "./selection-info";
 import { http } from "@/network";
 import { MAX_SIZE_ATTACHMENTS } from "@/config";
 import { formatBytes } from "@/lib/format-bytes";
+import { link } from "@/api/link";
+import { AccessType } from "@/enums";
+import { LinkLifeTimeType } from "@/api/link/enums";
 
 const defaultRequestParams = {
   id: "",
@@ -50,6 +53,7 @@ export function ShareDisk({
   const [directory, setDirectory] = useState<Directory | null>(null);
   const [searchData, setSearchData] =
     useState<DocumentDirectorySearchResponse | null>(null);
+  const [isSearch, setIsSearch] = useState(false);
 
   const [selectedRowIds, setSelectedRowIds] = useState<number[]>([]);
 
@@ -92,8 +96,10 @@ export function ShareDisk({
 
   const handleSearch = async (text: string) => {
     if (!text) {
-      fetchDirectory(requestParams);
+      await fetchDirectory(requestParams);
+      setIsSearch(false);
     } else {
+      setIsSearch(true);
       setIsLoading(true);
       try {
         const { data } = await search({ text });
@@ -136,6 +142,30 @@ export function ShareDisk({
           error.response?.data?.ErrorMessage ?? "Неизвестная ошибка"
         );
       }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCreateLinks = async () => {
+    setIsLoading(true);
+
+    try {
+      const links = await Promise.all(
+        selectedRows.map((row) =>
+          link({
+            id: row.Id,
+            accessType: AccessType.Read,
+            lifeTime: LinkLifeTimeType.Unlimited,
+            type: "MimeType" in row ? "Document" : "Directory",
+          })
+        )
+      );
+
+      console.log(links);
+
+      onCreateLink();
+      onClose();
     } finally {
       setIsLoading(false);
     }
@@ -187,7 +217,7 @@ export function ShareDisk({
           <Header onSearch={handleSearch} onClose={onClose} />
           <DirectoryBreadcrumbs
             directory={directory}
-            isSearch={!!searchData}
+            isSearch={isSearch}
             onBack={() =>
               fetchDirectory({
                 ...requestParams,
@@ -218,10 +248,7 @@ export function ShareDisk({
               isLimitExceeded={isLimitExceeded}
               onClose={() => setSelectedRowIds([])}
               onAttachFiles={handleAttachFiles}
-              onCreateLink={() => {
-                onCreateLink();
-                onClose();
-              }}
+              onCreateLink={handleCreateLinks}
             />
           )}
         </Box>

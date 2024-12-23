@@ -16,6 +16,7 @@ export function App() {
         <Button onClick={() => setOpened(true)}>Open share disk</Button>
       </Stack>
       <ShareDisk
+        enabledLinks
         opened={opened}
         onClose={() => setOpened(false)}
         onAttachFiles={(files) => console.log("Attach files", files)}
