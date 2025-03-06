@@ -39,4 +39,20 @@ export default defineConfig({
     svgr(),
     dts({ insertTypesEntry: true, tsconfigPath: "./tsconfig.app.json" }),
   ],
+  server: {
+    host: "share-disk-app.r7-office.ru",
+    proxy: {
+      "/api": {
+        target: "http://46.148.238.130:38033",
+        rewrite: (path) => path.replace(/^\/api/, "/api"),
+        cookieDomainRewrite: ".r7-office.ru",
+        changeOrigin: false,
+        configure: (proxy, _options) => {
+          proxy.on("proxyReq", (proxyReq, req, _res) => {
+            proxyReq.setHeader("X-Module", "Disk");
+          });
+        },
+      },
+    },
+  },
 });

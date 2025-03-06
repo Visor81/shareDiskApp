@@ -38,7 +38,9 @@ export interface ShareDiskProps {
   enabledLinks?: boolean;
   onClose: () => void;
   onAttachFiles: (files: File[]) => void;
-  onCreateLink: (items: GenerateLinkResponse[]) => void;
+  onCreateLink: (
+    items: { link: GenerateLinkResponse; item: DirectoryDocument }[]
+  ) => void;
 }
 
 export function ShareDisk({
@@ -163,7 +165,12 @@ export function ShareDisk({
         )
       );
 
-      onCreateLink(response.map((item) => item.data));
+      onCreateLink(
+        response.map((item, index) => ({
+          link: item.data,
+          item: selectedRows[index] as DirectoryDocument,
+        }))
+      );
       onClose();
     } finally {
       setIsLoading(false);

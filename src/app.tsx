@@ -20,7 +20,7 @@ export function App() {
         opened={opened}
         onClose={() => setOpened(false)}
         onAttachFiles={(files) => console.log("Attach files", files)}
-        onCreateLink={() => console.log("Create link")}
+        onCreateLink={(items) => console.log("Create link", items)}
       />
     </MantineProvider>
   );
