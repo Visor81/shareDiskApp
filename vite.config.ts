@@ -47,8 +47,8 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, "/api"),
         cookieDomainRewrite: ".r7-office.ru",
         changeOrigin: false,
-        configure: (proxy, _options) => {
-          proxy.on("proxyReq", (proxyReq, req, _res) => {
+        configure: (proxy) => {
+          proxy.on("proxyReq", (proxyReq) => {
             proxyReq.setHeader("X-Module", "Disk");
           });
         },
