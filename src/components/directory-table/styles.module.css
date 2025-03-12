@@ -21,3 +21,20 @@
 .row.highlight .rowCheckbox {
   visibility: visible;
 }
+
+.rowName {
+  max-width: 340px;
+}
+
+@media (max-width: 850px) {
+  .table thead tr > th:nth-child(2),
+  .table tbody tr > td:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 850px) {
+  .rowName {
+    max-width: 200px;
+  }
+}

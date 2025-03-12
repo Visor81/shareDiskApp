@@ -1,4 +1,5 @@
-import { ActionIcon, Button, Group, Text } from "@mantine/core";
+import { ActionIcon, Button, Flex, Group, Text } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { IconX } from "@tabler/icons-react";
 
 export interface SelectionInfoProps {
@@ -20,25 +21,41 @@ export function SelectionInfo({
   onAttachFiles,
   onCreateLink,
 }: SelectionInfoProps) {
+  const isMobileMd = useMediaQuery("(max-width: 768px)");
+  const isMobileSm = useMediaQuery("(max-width: 640px)");
+
   return (
     <>
       {isLimitExceeded && (
-        <Group h={41} bg="yellow.4" px="md">
-          <Text fz={13} c="dark.7">
+        <Group h={61} bg="yellow.4" px="md">
+          <Text fz={13} c="dark.7" lh={1.4}>
             Общий объем отправляемых файлов превышает действующее ограничение
             (25 МБ). Файлы можно отправить в виде ссылок на Р7-Диск.
           </Text>
         </Group>
       )}
-      <Group gap="xs" bg="blue" c="#fff" px="md" h={76} w="100%">
-        <ActionIcon onClick={onClose}>
-          <IconX />
-        </ActionIcon>
-        <Text fz={15}>
-          Выбрано файлов: {count} ({size})
-        </Text>
-        <Group gap="xs" ml="auto">
+      <Flex
+        direction={isMobileSm ? "column" : "row"}
+        align="center"
+        justify={isMobileSm ? "center" : "space-between"}
+        gap={6}
+        bg="blue"
+        c="#fff"
+        px="md"
+        h={76}
+        w="100%"
+      >
+        <Group gap="xs">
+          <ActionIcon onClick={onClose}>
+            <IconX size={21} />
+          </ActionIcon>
+          <Text fz={isMobileMd ? 13 : 15}>
+            Выбрано файлов: {count} ({size})
+          </Text>
+        </Group>
+        <Group gap="xs">
           <Button
+            size={isMobileMd ? "xs" : ""}
             disabled={isLimitExceeded}
             variant="outline"
             color="#fff"
@@ -59,12 +76,16 @@ export function SelectionInfo({
             Прикрепить файл
           </Button>
           {enabledLinks && (
-            <Button variant="default" onClick={onCreateLink}>
+            <Button
+              size={isMobileMd ? "xs" : ""}
+              variant="default"
+              onClick={onCreateLink}
+            >
               Добавить ссылки
             </Button>
           )}
         </Group>
-      </Group>
+      </Flex>
     </>
   );
 }

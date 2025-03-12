@@ -26,6 +26,7 @@ import { link } from "@/api/link";
 import { AccessType } from "@/enums";
 import { LinkLifeTimeType } from "@/api/link/enums";
 import { GenerateLinkResponse } from "@/api/link/types";
+import { useMediaQuery } from "@mantine/hooks";
 
 const defaultRequestParams = {
   id: "",
@@ -61,6 +62,8 @@ export function ShareDisk({
   const [selectedRowIds, setSelectedRowIds] = useState<number[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const isMobile = useMediaQuery("(max-width: 640px)");
 
   const rows = useMemo(() => {
     if (searchData) {
@@ -236,7 +239,7 @@ export function ShareDisk({
             style={{
               height: `calc(100% - 48px - 64px - ${
                 selectedRowIds.length ? 76 : 0
-              }px - ${isLimitExceeded ? 41 : 0}px)`,
+              }px  + ${isMobile ? 16 : 0}px - ${isLimitExceeded ? 61 : 0}px)`,
             }}
           >
             <DirectoryTable

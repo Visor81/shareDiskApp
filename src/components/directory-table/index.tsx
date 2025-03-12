@@ -37,12 +37,13 @@ export function DirectoryTable({
     );
 
   return (
-    <Table.ScrollContainer minWidth={760} h="100%">
+    <Table.ScrollContainer minWidth={0} h="100%">
       <Table
         stickyHeader
         verticalSpacing="xs"
         horizontalSpacing="lg"
         styles={{ tr: { height: 40 } }}
+        className={classes.table}
       >
         <Table.Thead>
           <Table.Tr>
@@ -89,7 +90,7 @@ export function DirectoryTable({
                       />
                     )}
                   </Box>
-                  <Group gap={10}>
+                  <Group gap={10} styles={{ root: { flexGrow: 1 } }}>
                     <FileIcon
                       mimeType={"MimeType" in row ? row.MimeType : ""}
                     />
@@ -99,7 +100,7 @@ export function DirectoryTable({
                         truncate
                         c="gray.8"
                         title={row.Name}
-                        maw={340}
+                        className={classes.rowName}
                       >
                         {row.Name}
                       </Text>
@@ -110,7 +111,7 @@ export function DirectoryTable({
                         title={row.Name}
                         fz={13}
                         fw={500}
-                        maw={340}
+                        className={classes.rowName}
                         onMouseDown={(event) => event.stopPropagation()}
                         onClick={() => onOpenDir(row.Id)}
                       >
