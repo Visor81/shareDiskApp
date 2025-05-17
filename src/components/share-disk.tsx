@@ -37,7 +37,7 @@ const defaultRequestParams = {
 export interface ShareDiskProps {
   opened: boolean;
   enabledLinks?: boolean;
-  maxSizeAttachments: number;
+  maxSizeAttachments?: number;
   onClose: () => void;
   onAttachFiles: (files: File[]) => void;
   onCreateLink: (
