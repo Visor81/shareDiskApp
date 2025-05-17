@@ -37,6 +37,7 @@ const defaultRequestParams = {
 export interface ShareDiskProps {
   opened: boolean;
   enabledLinks?: boolean;
+  maxSizeAttachments: number;
   onClose: () => void;
   onAttachFiles: (files: File[]) => void;
   onCreateLink: (
@@ -47,6 +48,7 @@ export interface ShareDiskProps {
 export function ShareDisk({
   opened,
   enabledLinks = false,
+  maxSizeAttachments = MAX_SIZE_ATTACHMENTS,
   onClose,
   onAttachFiles,
   onCreateLink,
@@ -83,7 +85,7 @@ export function ShareDisk({
     [selectedRows]
   );
 
-  const isLimitExceeded = selectedRowsSize > MAX_SIZE_ATTACHMENTS;
+  const isLimitExceeded = selectedRowsSize > maxSizeAttachments;
 
   const fetchDirectory = useCallback(
     async (params: DocumentDirectoryRequestParams) => {
