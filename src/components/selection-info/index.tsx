@@ -47,7 +47,7 @@ export function SelectionInfo({
       >
         <Group gap="xs">
           <ActionIcon onClick={onClose}>
-            <IconX size={21} />
+            <IconX size={21} color="#fff" />
           </ActionIcon>
           <Text fz={isMobileMd ? 13 : 15}>
             Выбрано файлов: {count} ({size})
