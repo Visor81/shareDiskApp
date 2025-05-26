@@ -1183,7 +1183,7 @@ function k2({
         w: "100%",
         children: [
           /* @__PURE__ */ i.jsxs(V, { gap: "xs", children: [
-            /* @__PURE__ */ i.jsx(d1, { onClick: m, children: /* @__PURE__ */ i.jsx(S1, { size: 21 }) }),
+            /* @__PURE__ */ i.jsx(d1, { onClick: m, children: /* @__PURE__ */ i.jsx(S1, { size: 21, color: "#fff" }) }),
             /* @__PURE__ */ i.jsxs(L1, { fz: x ? 13 : 15, children: [
               "Выбрано файлов: ",
               d,
