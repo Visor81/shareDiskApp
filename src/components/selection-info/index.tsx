@@ -81,7 +81,7 @@ export function SelectionInfo({
               variant="default"
               onClick={onCreateLink}
             >
-              Добавить ссылки
+              {count === 1 ? 'Добавить ссылку' : 'Добавить ссылки'}
             </Button>
           )}
         </Group>
