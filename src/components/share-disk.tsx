@@ -129,7 +129,9 @@ export function ShareDisk({
     try {
       const response = await Promise.all(
         docs.map((doc) =>
-          http.get<Blob>(`/v1/Documents/Download?id=${doc.Id}&download=false`)
+          http.get<Blob>(`/v1/Documents/Download?id=${doc.Id}&download=false`, {
+            responseType: "blob",
+          })
         )
       );
 
