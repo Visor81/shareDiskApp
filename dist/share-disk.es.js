@@ -1288,7 +1288,9 @@ function I2({
     try {
       const D = (await Promise.all(
         y.map(
-          (B) => p1.get(`/v1/Documents/Download?id=${B.Id}&download=false`)
+          (B) => p1.get(`/v1/Documents/Download?id=${B.Id}&download=false`, {
+            responseType: "blob"
+          })
         )
       )).map(
         (B, G) => new File([B.data], y[G].Name, {
