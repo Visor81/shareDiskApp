@@ -7,6 +7,7 @@ export interface SelectionInfoProps {
   count: number;
   size: string;
   isLimitExceeded: boolean;
+  isExternalLinkDisabled: boolean;
   onClose: () => void;
   onAttachFiles: () => void;
   onCreateLink: () => void;
@@ -17,6 +18,7 @@ export function SelectionInfo({
   count,
   size,
   isLimitExceeded,
+  isExternalLinkDisabled,
   onClose,
   onAttachFiles,
   onCreateLink,
@@ -73,9 +75,9 @@ export function SelectionInfo({
                   }
             }
           >
-            Прикрепить файл
+            {count === 1 ? 'Прикрепить файл' : 'Прикрепить файлы'}
           </Button>
-          {enabledLinks && (
+          {enabledLinks && !isExternalLinkDisabled && (
             <Button
               size={isMobileMd ? "xs" : ""}
               variant="default"

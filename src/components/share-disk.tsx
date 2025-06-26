@@ -27,6 +27,8 @@ import { AccessType } from "@/enums";
 import { LinkLifeTimeType } from "@/api/link/enums";
 import { GenerateLinkResponse } from "@/api/link/types";
 import { useMediaQuery } from "@mantine/hooks";
+import { Settings } from '../api/settings/types';
+import { getSettings } from "@/api/settings";
 
 const defaultRequestParams = {
   id: "",
@@ -40,6 +42,7 @@ export interface ShareDiskProps {
   maxSizeAttachments?: number;
   onClose: () => void;
   onAttachFiles: (files: File[]) => void;
+  offsetSize?: number;
   onCreateLink: (
     items: { link: GenerateLinkResponse; item: DirectoryDocument }[]
   ) => void;
@@ -51,10 +54,12 @@ export function ShareDisk({
   maxSizeAttachments = MAX_SIZE_ATTACHMENTS,
   onClose,
   onAttachFiles,
+  offsetSize = 0,
   onCreateLink,
 }: ShareDiskProps) {
   const [requestParams, setRequestParams] =
     useState<DocumentDirectoryRequestParams>(defaultRequestParams);
+  const [settings, setSettings] = useState<Settings | null>(null);
 
   const [directory, setDirectory] = useState<Directory | null>(null);
   const [searchData, setSearchData] =
@@ -85,7 +90,7 @@ export function ShareDisk({
     [selectedRows]
   );
 
-  const isLimitExceeded = selectedRowsSize > maxSizeAttachments;
+  const isLimitExceeded = offsetSize + selectedRowsSize > maxSizeAttachments;
 
   const fetchDirectory = useCallback(
     async (params: DocumentDirectoryRequestParams) => {
@@ -188,6 +193,7 @@ export function ShareDisk({
     if (opened) {
       const load = async () => {
         const response = await getDirectory();
+        const respSettings = await getSettings();
         const docsId = response.data.find(
           (item) => item.Type === DocumentDirectoryType.Docs
         )!.Id;
@@ -199,6 +205,7 @@ export function ShareDisk({
         };
 
         setRequestParams(newRequestParams);
+        setSettings(respSettings.data);
 
         fetchDirectory(newRequestParams);
       };
@@ -262,6 +269,7 @@ export function ShareDisk({
               onClose={() => setSelectedRowIds([])}
               onAttachFiles={handleAttachFiles}
               onCreateLink={handleCreateLinks}
+              isExternalLinkDisabled={settings?.ExternalLinkSettings?.IsDisabled || false}
             />
           )}
         </Box>
