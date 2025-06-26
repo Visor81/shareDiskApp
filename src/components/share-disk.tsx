@@ -230,7 +230,7 @@ export function ShareDisk({
         size={950}
         radius="lg"
         padding={0}
-        onClose={() => {}}
+        onClose={onClose}
       >
         <Box h={590} pos="relative">
           <LoadingOverlay visible={isLoading} />
