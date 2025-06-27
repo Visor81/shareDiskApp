@@ -27,8 +27,6 @@ import { AccessType } from "@/enums";
 import { LinkLifeTimeType } from "@/api/link/enums";
 import { GenerateLinkResponse } from "@/api/link/types";
 import { useMediaQuery } from "@mantine/hooks";
-import { Settings } from '../api/settings/types';
-import { getSettings } from "@/api/settings";
 
 const defaultRequestParams = {
   id: "",
@@ -59,7 +57,6 @@ export function ShareDisk({
 }: ShareDiskProps) {
   const [requestParams, setRequestParams] =
     useState<DocumentDirectoryRequestParams>(defaultRequestParams);
-  const [settings, setSettings] = useState<Settings | null>(null);
 
   const [directory, setDirectory] = useState<Directory | null>(null);
   const [searchData, setSearchData] =
@@ -193,7 +190,7 @@ export function ShareDisk({
     if (opened) {
       const load = async () => {
         const response = await getDirectory();
-        const respSettings = await getSettings();
+        // const respSettings = await getSettings();
         const docsId = response.data.find(
           (item) => item.Type === DocumentDirectoryType.Docs
         )!.Id;
@@ -205,7 +202,7 @@ export function ShareDisk({
         };
 
         setRequestParams(newRequestParams);
-        setSettings(respSettings.data);
+        // setSettings(respSettings.data);
 
         fetchDirectory(newRequestParams);
       };
@@ -226,6 +223,7 @@ export function ShareDisk({
       <Modal
         centered
         withCloseButton={false}
+        closeOnEscape={false}
         opened={opened}
         size={950}
         radius="lg"
@@ -269,7 +267,6 @@ export function ShareDisk({
               onClose={() => setSelectedRowIds([])}
               onAttachFiles={handleAttachFiles}
               onCreateLink={handleCreateLinks}
-              isExternalLinkDisabled={settings?.ExternalLinkSettings?.IsDisabled || false}
             />
           )}
         </Box>

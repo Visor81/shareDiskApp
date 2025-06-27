@@ -79,7 +79,7 @@ export function DirectoryTable({
               }
             >
               <Table.Td fz={13}>
-                <Group gap="xs">
+                <Group gap="xs" styles={{ root: {flexFlow: "noWrap"} }}>
                   <Box h={16} w={16}>
                     {"MimeType" in row && (
                       <Checkbox
@@ -90,7 +90,7 @@ export function DirectoryTable({
                       />
                     )}
                   </Box>
-                  <Group gap={10} styles={{ root: { flexGrow: 1 } }}>
+                  <Group gap={10} styles={{ root: { flexGrow: 1, flexWrap: "nowrap" } }}>
                     <FileIcon
                       mimeType={"MimeType" in row ? row.MimeType : ""}
                     />

@@ -7,7 +7,6 @@ export interface SelectionInfoProps {
   count: number;
   size: string;
   isLimitExceeded: boolean;
-  isExternalLinkDisabled: boolean;
   onClose: () => void;
   onAttachFiles: () => void;
   onCreateLink: () => void;
@@ -18,7 +17,6 @@ export function SelectionInfo({
   count,
   size,
   isLimitExceeded,
-  isExternalLinkDisabled,
   onClose,
   onAttachFiles,
   onCreateLink,
@@ -31,8 +29,8 @@ export function SelectionInfo({
       {isLimitExceeded && (
         <Group h={61} bg="yellow.4" px="md">
           <Text fz={13} c="dark.7" lh={1.4}>
-            Общий объем отправляемых файлов превышает действующее ограничение
-            (25 МБ). Файлы можно отправить в виде ссылок на Р7-Диск.
+            {`Общий объем отправляемых файлов превышает действующее ограничение
+            (25 МБ). ${enabledLinks ? "Файлы можно отправить в виде ссылок на Р7-Диск." : ""}`}
           </Text>
         </Group>
       )}
@@ -77,16 +75,14 @@ export function SelectionInfo({
           >
             {count === 1 ? 'Прикрепить файл' : 'Прикрепить файлы'}
           </Button>
-          {enabledLinks && (
-            <Button
-              disabled={isExternalLinkDisabled}
-              size={isMobileMd ? "xs" : ""}
-              variant="default"
-              onClick={onCreateLink}
-            >
-              {count === 1 ? 'Добавить ссылку' : 'Добавить ссылки'}
-            </Button>
-          )}
+          <Button
+            disabled={!enabledLinks}
+            size={isMobileMd ? "xs" : ""}
+            variant="default"
+            onClick={onCreateLink}
+          >
+            {count === 1 ? 'Добавить ссылку' : 'Добавить ссылки'}
+          </Button>
         </Group>
       </Flex>
     </>
