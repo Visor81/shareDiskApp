@@ -77,8 +77,9 @@ export function SelectionInfo({
           >
             {count === 1 ? 'Прикрепить файл' : 'Прикрепить файлы'}
           </Button>
-          {enabledLinks && !isExternalLinkDisabled && (
+          {enabledLinks && (
             <Button
+              disabled={isExternalLinkDisabled}
               size={isMobileMd ? "xs" : ""}
               variant="default"
               onClick={onCreateLink}
