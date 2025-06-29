@@ -6,9 +6,10 @@ export interface ShareDiskProps {
     maxSizeAttachments?: number;
     onClose: () => void;
     onAttachFiles: (files: File[]) => void;
+    offsetSize?: number;
     onCreateLink: (items: {
         link: GenerateLinkResponse;
         item: DirectoryDocument;
     }[]) => void;
 }
-export declare function ShareDisk({ opened, enabledLinks, maxSizeAttachments, onClose, onAttachFiles, onCreateLink, }: ShareDiskProps): import("react/jsx-runtime").JSX.Element;
+export declare function ShareDisk({ opened, enabledLinks, maxSizeAttachments, onClose, onAttachFiles, offsetSize, onCreateLink, }: ShareDiskProps): import("react/jsx-runtime").JSX.Element;
