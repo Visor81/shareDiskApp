@@ -64,6 +64,7 @@ export function ShareDisk({
   const [isSearch, setIsSearch] = useState(false);
 
   const [selectedRowIds, setSelectedRowIds] = useState<number[]>([]);
+  const [selectedRws, setSelectedRws] = useState<(Directory | DirectoryDocument)[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -78,8 +79,18 @@ export function ShareDisk({
   }, [directory, searchData]);
 
   const selectedRows = useMemo(
-    () => rows.filter((item) => selectedRowIds.includes(item.Id)),
-    [rows, selectedRowIds]
+    () => {
+      let filteredRows = rows.filter((item) => selectedRowIds.includes(item.Id));
+      const filteredRowsIds = filteredRows.map((row) => row.Id);
+
+      const previousDirectorySelectedRows = selectedRws.filter(sr => !filteredRowsIds.includes(sr.Id));
+      if (previousDirectorySelectedRows.length) {
+        filteredRows = [...previousDirectorySelectedRows, ...filteredRows];
+      }
+
+      return filteredRows;
+    },
+    [rows, selectedRowIds, selectedRws]
   );
 
   const selectedRowsSize = useMemo(
@@ -124,9 +135,10 @@ export function ShareDisk({
   const handleAttachFiles = async () => {
     setIsLoading(true);
 
-    const docs = rows.filter((row) =>
-      selectedRowIds.includes(row.Id)
-    ) as DirectoryDocument[];
+    // const docs = rows.filter((row) =>
+    //   selectedRowIds.includes(row.Id)
+    // ) as DirectoryDocument[];
+    const docs = selectedRows as DirectoryDocument[];
 
     try {
       const response = await Promise.all(
@@ -145,6 +157,7 @@ export function ShareDisk({
       );
 
       setSelectedRowIds([]);
+      setSelectedRws([]);
 
       onAttachFiles(files);
       onClose();
@@ -214,6 +227,7 @@ export function ShareDisk({
         setDirectory(null);
         setSearchData(null);
         setSelectedRowIds([]);
+        setSelectedRws([]);
       };
     }
   }, [opened, fetchDirectory]);
@@ -255,7 +269,15 @@ export function ShareDisk({
               rows={rows}
               selectedRowIds={selectedRowIds}
               onOpenDir={(id) => fetchDirectory({ ...requestParams, id })}
-              onSelect={(ids) => setSelectedRowIds(ids)}
+              onSelect={(ids) => {
+                setSelectedRowIds(ids);
+
+                const currentDirectoryIds = rows?.map(r => r.Id);
+                const previousDirectorySelectedRows = selectedRws.filter(sr => !currentDirectoryIds.includes(sr.Id));
+                setSelectedRws(previousDirectorySelectedRows?.length ?
+                [...previousDirectorySelectedRows, ...rows.filter((item) => ids.includes(item.Id))]  
+                : rows.filter((item) => ids.includes(item.Id)));
+              }}
             />
           </Box>
           {!!selectedRowIds.length && (
@@ -264,7 +286,10 @@ export function ShareDisk({
               count={selectedRowIds.length}
               size={formatBytes(selectedRowsSize)}
               isLimitExceeded={isLimitExceeded}
-              onClose={() => setSelectedRowIds([])}
+              onClose={() => {
+                setSelectedRowIds([]);
+                setSelectedRws([]);
+              }}
               onAttachFiles={handleAttachFiles}
               onCreateLink={handleCreateLinks}
             />

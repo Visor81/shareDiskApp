@@ -75,14 +75,13 @@ export function SelectionInfo({
           >
             {count === 1 ? 'Прикрепить файл' : 'Прикрепить файлы'}
           </Button>
-          <Button
-            disabled={!enabledLinks}
+          {enabledLinks && (<Button
             size={isMobileMd ? "xs" : ""}
             variant="default"
             onClick={onCreateLink}
           >
             {count === 1 ? 'Добавить ссылку' : 'Добавить ссылки'}
-          </Button>
+          </Button>)}
         </Group>
       </Flex>
     </>
