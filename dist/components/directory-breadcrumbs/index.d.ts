@@ -4,5 +4,6 @@ export interface DirectoryBreadcrumbsProps {
     isSearch: boolean;
     onBack: () => void;
     onItemClick: (id: number) => void;
+    locale?: 'en' | 'ru';
 }
-export declare function DirectoryBreadcrumbs({ directory, isSearch, onBack, onItemClick, }: DirectoryBreadcrumbsProps): import("react/jsx-runtime").JSX.Element;
+export declare function DirectoryBreadcrumbs({ directory, isSearch, onBack, onItemClick, locale }: DirectoryBreadcrumbsProps): import("react/jsx-runtime").JSX.Element;

@@ -6,5 +6,6 @@ export interface SelectionInfoProps {
     onClose: () => void;
     onAttachFiles: () => void;
     onCreateLink: () => void;
+    locale?: 'en' | 'ru';
 }
-export declare function SelectionInfo({ enabledLinks, count, size, isLimitExceeded, onClose, onAttachFiles, onCreateLink, }: SelectionInfoProps): import("react/jsx-runtime").JSX.Element;
+export declare function SelectionInfo({ enabledLinks, count, size, isLimitExceeded, onClose, onAttachFiles, onCreateLink, locale }: SelectionInfoProps): import("react/jsx-runtime").JSX.Element;

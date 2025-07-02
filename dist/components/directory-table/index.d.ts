@@ -4,5 +4,6 @@ export interface DirectoryTableProps {
     selectedRowIds: number[];
     onOpenDir: (id: number) => void;
     onSelect: (ids: number[]) => void;
+    locale?: 'en' | 'ru';
 }
-export declare function DirectoryTable({ rows, selectedRowIds, onOpenDir, onSelect, }: DirectoryTableProps): import("react/jsx-runtime").JSX.Element;
+export declare function DirectoryTable({ rows, selectedRowIds, onOpenDir, onSelect, locale }: DirectoryTableProps): import("react/jsx-runtime").JSX.Element;
