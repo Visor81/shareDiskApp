@@ -6,9 +6,60 @@ import { useMemo } from "react";
 
 const MAX_ITEMS = 3;
 
+const rootDirectoriesConfig = [ 
+  {
+    name: 'docs',
+    type: 16
+  },
+  {
+    name: 'sharedToMe',
+    type: 256
+  },
+  {
+    name: 'sharedAccess',
+    type: 8
+  },
+  {
+    name: 'favorites',
+    type: 512
+  },
+  {
+    name: 'common',
+    type: 4
+  },
+  {
+    name: 'recycleBin',
+    type: 134217728
+  },
+  {
+    name: 'globalRecycleBin',
+    type: 369098752
+  },
+  {
+    name: 'recent',
+    type: 2048
+  },
+  {
+    name: 'link',
+    type: -1
+  },
+  {
+    name: 'fileDepot',
+    type: 8192
+  },
+  {
+    name: 'rooms',
+    type: 4096
+  },
+  {
+    name: 'room'
+  }
+];
+
 interface BreadcrumbItem {
   id: number;
   title: string;
+  type: number;
   children?: BreadcrumbItem[];
 }
 
@@ -33,6 +84,7 @@ export function DirectoryBreadcrumbs({
         {
           id: 0,
           title: `${localize(locale, 'SearchResults')}`, 
+          type: 0
         },
       ];
 
@@ -44,6 +96,7 @@ export function DirectoryBreadcrumbs({
       {
         title: directory.Name,
         id: directory.Id,
+        type: directory.Type
       },
     ];
 
@@ -51,6 +104,7 @@ export function DirectoryBreadcrumbs({
       result.unshift({
         title: parent.Name,
         id: parent.Id,
+        type: parent.Type || 0
       });
 
       parent = parent.Parent;
@@ -58,7 +112,7 @@ export function DirectoryBreadcrumbs({
 
     if (result.length > MAX_ITEMS) {
       const children = result.splice(1, result.length - MAX_ITEMS);
-      result.splice(1, 0, { id: 0, title: "...", children });
+      result.splice(1, 0, { id: 0, title: "...", type: 0, children });
     }
 
     return result;
@@ -97,7 +151,7 @@ export function DirectoryBreadcrumbs({
                     fz={14}
                     leftSection={<IconFolder stroke={1.2} size={18} />}
                   >
-                    {item.title}
+                    {rootDirectoriesConfig?.some(el => el.type === item.type) ? localize(locale, rootDirectoriesConfig?.find(el => el.type === item.type)?.name || '') : item.title}
                   </Menu.Item>
                 ))}
               </Menu.Dropdown>
@@ -113,7 +167,7 @@ export function DirectoryBreadcrumbs({
               maw={200}
               onClick={item.id === 0 ? undefined : () => onItemClick(item.id)}
             >
-              {item.title}
+              {rootDirectoriesConfig?.some(el => el.type === item.type) ? localize(locale, rootDirectoriesConfig?.find(el => el.type === item.type)?.name || '') : item.title}
             </Anchor>
           )
         )}

@@ -18,7 +18,19 @@ const info: DynamicLocale =
         AttachFile: 'Attach file',
         AttachFiles: 'Attach files',
         AddLink: 'Add link',
-        AddLinks: 'Add links'
+        AddLinks: 'Add links',
+        docs: 'My documents',
+        sharedToMe: 'Shared to me',
+        sharedAccess: 'Shared access',
+        favorites: 'Favorites',
+        common: 'Common',
+        recycleBin: 'Recycle bin',
+        globalRecycleBin: 'Global recycle bin',
+        recent: 'Recent',
+        link: 'Link',
+        fileDepot: 'File depot',
+        rooms: 'Rooms',
+        room: 'Room'
     },
     ru: {
         MyDocuments: 'Мои документы',
@@ -34,7 +46,19 @@ const info: DynamicLocale =
         AttachFile: 'Прикрепить файл',
         AttachFiles: 'Прикрепить файлы',
         AddLink: 'Добавить ссылку',
-        AddLinks: 'Добавить ссылки'
+        AddLinks: 'Добавить ссылки',
+        docs: 'Мои документы',
+        sharedToMe: 'Доступно для меня',
+        sharedAccess: 'Общий доступ',
+        favorites: 'Избранное',
+        common: 'Общее',
+        recycleBin: 'Корзина',
+        globalRecycleBin: 'Глобальная корзина',
+        recent: 'НЕдавнее',
+        link: 'Ссылка',
+        fileDepot: 'Хранилище файлов',
+        rooms: 'Комнаты',
+        room: 'Комната'
     }
 }
 

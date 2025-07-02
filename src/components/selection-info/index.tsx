@@ -32,7 +32,7 @@ export function SelectionInfo({
       {isLimitExceeded && (
         <Group h={61} bg="yellow.4" px="md">
           <Text fz={13} c="dark.7" lh={1.4}>
-            {`${localize(locale, 'MaxSizeLimitPartOne')} ${enabledLinks ? localize(locale, 'MaxSizeLimitPartOne') : ""}`}
+            {`${localize(locale, 'MaxSizeLimitPartOne')} ${enabledLinks ? localize(locale, 'MaxSizeLimitPartTwo') : ""}`}
           </Text>
         </Group>
       )}
