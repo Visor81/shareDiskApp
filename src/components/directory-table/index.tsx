@@ -6,12 +6,14 @@ import { formatBytes } from "@/lib/format-bytes";
 import { FileIcon } from "../file-icon";
 
 import classes from "./styles.module.css";
+import { localize } from "@/localization";
 
 export interface DirectoryTableProps {
   rows: (Directory | DirectoryDocument)[];
   selectedRowIds: number[];
   onOpenDir: (id: number) => void;
   onSelect: (ids: number[]) => void;
+  locale?: 'en' | 'ru';
 }
 
 export function DirectoryTable({
@@ -19,6 +21,7 @@ export function DirectoryTable({
   selectedRowIds,
   onOpenDir,
   onSelect,
+  locale
 }: DirectoryTableProps) {
   const isAllChecked = !!rows.length && rows.length === selectedRowIds.length;
 
@@ -55,14 +58,14 @@ export function DirectoryTable({
                   indeterminate={isIndeterminate}
                   onChange={() => handleAllSelected()}
                 />{" "}
-                Название
+                {`${localize(locale, 'ColumnName')}`}
               </Group>
             </Table.Th>
             <Table.Th c="gray.6" fw={500} fz={10} tt="uppercase">
-              Изменен
+              {`${localize(locale, 'ColumnChanged')}`}
             </Table.Th>
             <Table.Th c="gray.6" fw={500} fz={10} tt="uppercase">
-              Размер
+              {`${localize(locale, 'ColumnSize')}`}
             </Table.Th>
           </Table.Tr>
         </Table.Thead>
@@ -130,7 +133,7 @@ export function DirectoryTable({
                 {"Size" in row
                   ? isNaN(+row.Size)
                     ? null
-                    : formatBytes(+row.Size)
+                    : formatBytes(+row.Size, 2, locale || 'ru')
                   : "-"}
               </Table.Td>
             </Table.Tr>

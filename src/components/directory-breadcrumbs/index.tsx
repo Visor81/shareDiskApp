@@ -1,4 +1,5 @@
 import { Directory, DirectoryParent } from "@/api";
+import { localize } from "@/localization";
 import { ActionIcon, Anchor, Breadcrumbs, Group, Menu } from "@mantine/core";
 import { IconArrowUp, IconChevronRight, IconFolder } from "@tabler/icons-react";
 import { useMemo } from "react";
@@ -16,6 +17,7 @@ export interface DirectoryBreadcrumbsProps {
   isSearch: boolean;
   onBack: () => void;
   onItemClick: (id: number) => void;
+  locale?: 'en' | 'ru';
 }
 
 export function DirectoryBreadcrumbs({
@@ -23,13 +25,14 @@ export function DirectoryBreadcrumbs({
   isSearch,
   onBack,
   onItemClick,
+  locale
 }: DirectoryBreadcrumbsProps) {
   const items = useMemo(() => {
     if (isSearch)
       return [
         {
           id: 0,
-          title: "Результаты поиска",
+          title: `${localize(locale, 'SearchResults')}`, 
         },
       ];
 

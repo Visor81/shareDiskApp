@@ -3,15 +3,18 @@ import { ActionIcon, Button, Group, TextInput } from "@mantine/core";
 import { IconSearch, IconX } from "@tabler/icons-react";
 
 import LogoDrive from "@/icons/logo-drive.svg?react";
+import LogoEnDrive from "@/icons/logo_eng.svg?react";
 import LogoDriveFull from "@/icons/logo-drive-full.svg?react";
 import { useMediaQuery } from "@mantine/hooks";
+import { localize } from "@/localization";
 
 export interface HeaderProps {
   onSearch: (value: string) => void;
   onClose: () => void;
+  locale?: 'en' | 'ru';
 }
 
-export function Header({ onSearch, onClose }: HeaderProps) {
+export function Header({ onSearch, onClose, locale }: HeaderProps) {
   const [searchValue, setSearchValue] = useState("");
 
   const isMobile = useMediaQuery("(max-width: 640px)");
@@ -24,14 +27,14 @@ export function Header({ onSearch, onClose }: HeaderProps) {
       px="lg"
       styles={{ root: { flexShrink: 0 } }}
     >
-      <Group mr="xs">{isMobile ? <LogoDrive /> : <LogoDriveFull />}</Group>
+      <Group mr="xs">{isMobile ? <LogoDrive /> : locale === 'ru' ? <LogoDriveFull /> : <LogoEnDrive />}</Group>
       <TextInput
         variant="filled"
         size="md"
         fz={16}
         maw={480}
         styles={{ root: { flexGrow: 1 } }}
-        placeholder="Поиск"
+        placeholder={`${localize(locale, 'Search')}`}
         value={searchValue}
         leftSection={<IconSearch stroke={1.2} />}
         rightSectionProps={{ style: { width: 110 } }}
@@ -55,7 +58,7 @@ export function Header({ onSearch, onClose }: HeaderProps) {
                 fz={12}
                 onClick={() => onSearch(searchValue.trim())}
               >
-                Найти
+                {`${localize(locale, 'Find')}`}
               </Button>
             </Group>
           )

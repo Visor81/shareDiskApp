@@ -40,6 +40,7 @@ export interface ShareDiskProps {
   maxSizeAttachments?: number;
   onClose: () => void;
   onAttachFiles: (files: File[]) => void;
+  locale?: 'en' | 'ru',
   offsetSize?: number;
   onCreateLink: (
     items: { link: GenerateLinkResponse; item: DirectoryDocument }[]
@@ -54,6 +55,7 @@ export function ShareDisk({
   onAttachFiles,
   offsetSize = 0,
   onCreateLink,
+  locale = 'en',
 }: ShareDiskProps) {
   const [requestParams, setRequestParams] =
     useState<DocumentDirectoryRequestParams>(defaultRequestParams);
@@ -246,7 +248,7 @@ export function ShareDisk({
       >
         <Box h={590} pos="relative">
           <LoadingOverlay visible={isLoading} />
-          <Header onSearch={handleSearch} onClose={onClose} />
+          <Header onSearch={handleSearch} onClose={onClose} locale={locale}/>
           <DirectoryBreadcrumbs
             directory={directory}
             isSearch={isSearch}
@@ -257,6 +259,7 @@ export function ShareDisk({
               })
             }
             onItemClick={(id) => fetchDirectory({ ...requestParams, id })}
+            locale={locale}
           />
           <Box
             style={{
@@ -278,13 +281,14 @@ export function ShareDisk({
                 [...previousDirectorySelectedRows, ...rows.filter((item) => ids.includes(item.Id))]  
                 : rows.filter((item) => ids.includes(item.Id)));
               }}
+              locale={locale}
             />
           </Box>
           {!!selectedRowIds.length && (
             <SelectionInfo
               enabledLinks={enabledLinks}
               count={selectedRowIds.length}
-              size={formatBytes(selectedRowsSize)}
+              size={formatBytes(selectedRowsSize, 2, locale)}
               isLimitExceeded={isLimitExceeded}
               onClose={() => {
                 setSelectedRowIds([]);
@@ -292,6 +296,7 @@ export function ShareDisk({
               }}
               onAttachFiles={handleAttachFiles}
               onCreateLink={handleCreateLinks}
+              locale={locale}
             />
           )}
         </Box>
