@@ -13,7 +13,7 @@ export interface DirectoryTableProps {
   selectedRowIds: number[];
   onOpenDir: (id: number) => void;
   onSelect: (ids: number[]) => void;
-  locale?: 'en' | 'ru';
+  locale?: "en" | "ru";
 }
 
 export function DirectoryTable({
@@ -21,7 +21,7 @@ export function DirectoryTable({
   selectedRowIds,
   onOpenDir,
   onSelect,
-  locale
+  locale,
 }: DirectoryTableProps) {
   const isAllChecked = !!rows.length && rows.length === selectedRowIds.length;
 
@@ -30,13 +30,17 @@ export function DirectoryTable({
   const checkRowSelected = (id: number) => selectedRowIds.includes(id);
 
   const handleAllSelected = () =>
-    onSelect(selectedRowIds.length ? [] : rows.map((row) => row.Id));
+    onSelect(
+      selectedRowIds.length
+        ? []
+        : rows.filter((row) => "MimeType" in row).map((row) => row.Id),
+    );
 
   const handleRowSelect = (id: number) =>
     onSelect(
       selectedRowIds.includes(id)
         ? selectedRowIds.filter((item) => item !== id)
-        : selectedRowIds.concat(id)
+        : selectedRowIds.concat(id),
     );
 
   return (
@@ -58,14 +62,14 @@ export function DirectoryTable({
                   indeterminate={isIndeterminate}
                   onChange={() => handleAllSelected()}
                 />{" "}
-                {`${localize(locale, 'ColumnName')}`}
+                {`${localize(locale, "ColumnName")}`}
               </Group>
             </Table.Th>
             <Table.Th c="gray.6" fw={500} fz={10} tt="uppercase">
-              {`${localize(locale, 'ColumnChanged')}`}
+              {`${localize(locale, "ColumnChanged")}`}
             </Table.Th>
             <Table.Th c="gray.6" fw={500} fz={10} tt="uppercase">
-              {`${localize(locale, 'ColumnSize')}`}
+              {`${localize(locale, "ColumnSize")}`}
             </Table.Th>
           </Table.Tr>
         </Table.Thead>
@@ -82,7 +86,7 @@ export function DirectoryTable({
               }
             >
               <Table.Td fz={13}>
-                <Group gap="xs" styles={{ root: {flexFlow: "noWrap"} }}>
+                <Group gap="xs" styles={{ root: { flexFlow: "noWrap" } }}>
                   <Box h={16} w={16}>
                     {"MimeType" in row && (
                       <Checkbox
@@ -93,7 +97,10 @@ export function DirectoryTable({
                       />
                     )}
                   </Box>
-                  <Group gap={10} styles={{ root: { flexGrow: 1, flexWrap: "nowrap" } }}>
+                  <Group
+                    gap={10}
+                    styles={{ root: { flexGrow: 1, flexWrap: "nowrap" } }}
+                  >
                     <FileIcon
                       mimeType={"MimeType" in row ? row.MimeType : ""}
                     />
@@ -133,7 +140,7 @@ export function DirectoryTable({
                 {"Size" in row
                   ? isNaN(+row.Size)
                     ? null
-                    : formatBytes(+row.Size, 2, locale || 'ru')
+                    : formatBytes(+row.Size, 2, locale || "ru")
                   : "-"}
               </Table.Td>
             </Table.Tr>
