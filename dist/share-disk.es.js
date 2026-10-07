@@ -1,6 +1,6 @@
 import * as n from "react";
-import H1, { forwardRef as _1, createElement as c1, useState as Z, useMemo as e1, useCallback as S1, useEffect as Z1 } from "react";
-import { Group as H, TextInput as F1, ActionIcon as t1, Button as d1, Table as L, Checkbox as g1, Box as C1, Text as p1, Anchor as m1, Breadcrumbs as V1, Menu as Q, Flex as A1, MantineProvider as B1, Modal as z1, LoadingOverlay as I1 } from "@mantine/core";
+import H1, { forwardRef as S1, createElement as c1, useState as F, useMemo as e1, useCallback as _1, useEffect as F1 } from "react";
+import { Group as H, TextInput as Z1, ActionIcon as t1, Button as d1, Table as L, Checkbox as g1, Box as C1, Text as p1, Anchor as m1, Breadcrumbs as V1, Menu as Q, Flex as A1, MantineProvider as B1, Modal as z1, LoadingOverlay as I1 } from "@mantine/core";
 import P1, { isAxiosError as N1 } from "axios";
 import { useMediaQuery as n1 } from "@mantine/hooks";
 var K = { exports: {} }, Y = {};
@@ -51,10 +51,10 @@ function D1() {
     function e(t) {
       if (t == null) return null;
       if (typeof t == "function")
-        return t.$$typeof === S ? null : t.displayName || t.name || null;
+        return t.$$typeof === _ ? null : t.displayName || t.name || null;
       if (typeof t == "string") return t;
       switch (t) {
-        case j:
+        case k:
           return "Fragment";
         case D:
           return "Profiler";
@@ -77,10 +77,10 @@ function D1() {
             return t.displayName || "Context";
           case z:
             return (t._context.displayName || "Context") + ".Consumer";
-          case k:
+          case j:
             var i = t.render;
             return t = t.displayName, t || (t = i.displayName || i.name || "", t = t !== "" ? "ForwardRef(" + t + ")" : "ForwardRef"), t;
-          case F:
+          case Z:
             return i = t.displayName || null, i !== null ? i : e(t.type) || "Memo";
           case I:
             i = t._payload, t = t._init;
@@ -112,7 +112,7 @@ function D1() {
       }
     }
     function c(t) {
-      if (t === j) return "<>";
+      if (t === k) return "<>";
       if (typeof t == "object" && t !== null && t.$$typeof === I)
         return "<...>";
       try {
@@ -236,12 +236,12 @@ React keys must be passed directly to JSX without using spread:
       );
     }
     function y(t) {
-      _(t) ? t._store && (t._store.validated = 1) : typeof t == "object" && t !== null && t.$$typeof === I && (t._payload.status === "fulfilled" ? _(t._payload.value) && t._payload.value._store && (t._payload.value._store.validated = 1) : t._store && (t._store.validated = 1));
+      S(t) ? t._store && (t._store.validated = 1) : typeof t == "object" && t !== null && t.$$typeof === I && (t._payload.status === "fulfilled" ? S(t._payload.value) && t._payload.value._store && (t._payload.value._store.validated = 1) : t._store && (t._store.validated = 1));
     }
-    function _(t) {
+    function S(t) {
       return typeof t == "object" && t !== null && t.$$typeof === A;
     }
-    var b = H1, A = Symbol.for("react.transitional.element"), G = Symbol.for("react.portal"), j = Symbol.for("react.fragment"), B = Symbol.for("react.strict_mode"), D = Symbol.for("react.profiler"), z = Symbol.for("react.consumer"), r1 = Symbol.for("react.context"), k = Symbol.for("react.forward_ref"), a1 = Symbol.for("react.suspense"), R = Symbol.for("react.suspense_list"), F = Symbol.for("react.memo"), I = Symbol.for("react.lazy"), J = Symbol.for("react.activity"), S = Symbol.for("react.client.reference"), $ = b.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, q = Object.prototype.hasOwnProperty, i1 = Array.isArray, m = console.createTask ? console.createTask : function() {
+    var b = H1, A = Symbol.for("react.transitional.element"), G = Symbol.for("react.portal"), k = Symbol.for("react.fragment"), B = Symbol.for("react.strict_mode"), D = Symbol.for("react.profiler"), z = Symbol.for("react.consumer"), r1 = Symbol.for("react.context"), j = Symbol.for("react.forward_ref"), a1 = Symbol.for("react.suspense"), R = Symbol.for("react.suspense_list"), Z = Symbol.for("react.memo"), I = Symbol.for("react.lazy"), J = Symbol.for("react.activity"), _ = Symbol.for("react.client.reference"), $ = b.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, q = Object.prototype.hasOwnProperty, i1 = Array.isArray, m = console.createTask ? console.createTask : function() {
       return null;
     };
     b = {
@@ -253,7 +253,7 @@ React keys must be passed directly to JSX without using spread:
       b,
       p
     )(), P = m(c(p)), V = {};
-    U.Fragment = j, U.jsx = function(t, i, f) {
+    U.Fragment = k, U.jsx = function(t, i, f) {
       var w = 1e4 > $.recentlyCreatedOwnerStacks++;
       return r(
         t,
@@ -315,11 +315,11 @@ var Y1 = {
  * See the LICENSE file in the root directory of this source tree.
  */
 const W = (e, s, C, c) => {
-  const d = _1(
-    ({ color: p = "currentColor", size: o = 24, stroke: a = 2, title: u, className: g, children: r, ...y }, _) => c1(
+  const d = S1(
+    ({ color: p = "currentColor", size: o = 24, stroke: a = 2, title: u, className: g, children: r, ...y }, S) => c1(
       "svg",
       {
-        ref: _,
+        ref: S,
         ...Y1[e],
         width: o,
         height: o,
@@ -428,6 +428,34 @@ const q1 = (e) => /* @__PURE__ */ n.createElement("svg", { width: 32, height: 32
     fileDepot: "Хранилище файлов",
     rooms: "Комнаты",
     room: "Комната"
+  },
+  th: {
+    MyDocuments: "เอกสารของฉัน",
+    Search: "ค้นหา",
+    Find: "ค้นหา",
+    SearchResults: "ผลการค้นหา",
+    ColumnName: "ชื่อ",
+    ColumnChanged: "แก้ไขเมื่อ",
+    ColumnSize: "ขนาด",
+    MaxSizeLimitPartOne: "ขนาดรวมของไฟล์ที่ส่งเกินขีดจำกัดปัจจุบัน (25 MB)",
+    MaxSizeLimitPartTwo: "สามารถส่งไฟล์เป็นลิงก์ไปยัง R7-Disk ได้",
+    FilesSelected: "ไฟล์ที่เลือก",
+    AttachFile: "แนบไฟล์",
+    AttachFiles: "แนบไฟล์",
+    AddLink: "เพิ่มลิงก์",
+    AddLinks: "เพิ่มลิงก์",
+    docs: "เอกสารของฉัน",
+    sharedToMe: "แชร์กับฉัน",
+    sharedAccess: "การเข้าถึงที่แชร์",
+    favorites: "รายการโปรด",
+    common: "ส่วนกลาง",
+    recycleBin: "ถังขยะ",
+    globalRecycleBin: "ถังขยะส่วนกลาง",
+    recent: "ล่าสุด",
+    link: "ลิงก์",
+    fileDepot: "คลังไฟล์",
+    rooms: "ห้อง",
+    room: "ห้อง"
   }
 }, M = (e, s) => {
   if (!e)
@@ -439,7 +467,7 @@ const q1 = (e) => /* @__PURE__ */ n.createElement("svg", { width: 32, height: 32
   return typeof c != "string" ? "" : c;
 };
 function K1({ onSearch: e, onClose: s, locale: C }) {
-  const [c, d] = Z(""), p = n1("(max-width: 640px)");
+  const [c, d] = F(""), p = n1("(max-width: 640px)");
   return /* @__PURE__ */ l.jsxs(
     H,
     {
@@ -451,7 +479,7 @@ function K1({ onSearch: e, onClose: s, locale: C }) {
       children: [
         /* @__PURE__ */ l.jsx(H, { mr: "xs", children: p ? /* @__PURE__ */ l.jsx(q1, {}) : C === "ru" ? /* @__PURE__ */ l.jsx(Q1, {}) : /* @__PURE__ */ l.jsx(X1, {}) }),
         /* @__PURE__ */ l.jsx(
-          F1,
+          Z1,
           {
             variant: "filled",
             size: "md",
@@ -508,7 +536,7 @@ function K1({ onSearch: e, onClose: s, locale: C }) {
 const T1 = (e, s = 2, C) => {
   if (!+e) return C === "en" ? "0 B" : "0 Б";
   const c = 1024, d = s < 0 ? 0 : s, p = ["Б", "КБ", "МБ", "ГБ", "ТБ", "ПБ", "ЭБ", "ЗБ", "ЙБ"], o = ["B", "KB", "MB", "GB", "TB", "PB", "AB", "ZB"], a = Math.floor(Math.log(e) / Math.log(c));
-  return `${parseFloat((e / Math.pow(c, a)).toFixed(d))} ${C === "en" ? o[a] : p[a]}`;
+  return `${parseFloat((e / Math.pow(c, a)).toFixed(d))} ${C === "en" || C === "th" ? o[a] : p[a]}`;
 }, e2 = {
   pdf: {
     fileType: "pdf",
@@ -691,7 +719,9 @@ function v2({
   onSelect: c,
   locale: d
 }) {
-  const p = !!e.length && e.length === s.length, o = !p && !!s.length, a = (r) => s.includes(r), u = () => c(s.length ? [] : e.map((r) => r.Id)), g = (r) => c(
+  const p = !!e.length && e.length === s.length, o = !p && !!s.length, a = (r) => s.includes(r), u = () => c(
+    s.length ? [] : e.filter((r) => "MimeType" in r).map((r) => r.Id)
+  ), g = (r) => c(
     s.includes(r) ? s.filter((y) => y !== r) : s.concat(r)
   );
   return /* @__PURE__ */ l.jsx(L.ScrollContainer, { minWidth: 0, h: "100%", children: /* @__PURE__ */ l.jsxs(
@@ -736,38 +766,45 @@ function v2({
                     className: O.rowCheckbox
                   }
                 ) }),
-                /* @__PURE__ */ l.jsxs(H, { gap: 10, styles: { root: { flexGrow: 1, flexWrap: "nowrap" } }, children: [
-                  /* @__PURE__ */ l.jsx(
-                    m2,
-                    {
-                      mimeType: "MimeType" in r ? r.MimeType : ""
-                    }
-                  ),
-                  "MimeType" in r ? /* @__PURE__ */ l.jsx(
-                    p1,
-                    {
-                      fz: 13,
-                      truncate: !0,
-                      c: "gray.8",
-                      title: r.Name,
-                      className: O.rowName,
-                      children: r.Name
-                    }
-                  ) : /* @__PURE__ */ l.jsx(
-                    m1,
-                    {
-                      truncate: !0,
-                      c: "gray.8",
-                      title: r.Name,
-                      fz: 13,
-                      fw: 500,
-                      className: O.rowName,
-                      onMouseDown: (y) => y.stopPropagation(),
-                      onClick: () => C(r.Id),
-                      children: r.Name
-                    }
-                  )
-                ] })
+                /* @__PURE__ */ l.jsxs(
+                  H,
+                  {
+                    gap: 10,
+                    styles: { root: { flexGrow: 1, flexWrap: "nowrap" } },
+                    children: [
+                      /* @__PURE__ */ l.jsx(
+                        m2,
+                        {
+                          mimeType: "MimeType" in r ? r.MimeType : ""
+                        }
+                      ),
+                      "MimeType" in r ? /* @__PURE__ */ l.jsx(
+                        p1,
+                        {
+                          fz: 13,
+                          truncate: !0,
+                          c: "gray.8",
+                          title: r.Name,
+                          className: O.rowName,
+                          children: r.Name
+                        }
+                      ) : /* @__PURE__ */ l.jsx(
+                        m1,
+                        {
+                          truncate: !0,
+                          c: "gray.8",
+                          title: r.Name,
+                          fz: 13,
+                          fw: 500,
+                          className: O.rowName,
+                          onMouseDown: (y) => y.stopPropagation(),
+                          onClick: () => C(r.Id),
+                          children: r.Name
+                        }
+                      )
+                    ]
+                  }
+                )
               ] }) }),
               /* @__PURE__ */ l.jsx(L.Td, { fz: 12, c: "dimmed", children: /* @__PURE__ */ l.jsx("span", { title: new Date(r.Timestamp).toLocaleString("ru-Ru"), children: new Date(r.Timestamp).toLocaleString("ru-Ru") }) }),
               /* @__PURE__ */ l.jsx(L.Td, { fz: 12, c: "dimmed", children: "Size" in r ? isNaN(+r.Size) ? null : T1(+r.Size, 2, d || "ru") : "-" })
@@ -1000,7 +1037,7 @@ const L2 = 26214400, T2 = (e) => {
   );
   return l1.get("v1/Link/Generate", { params: s });
 };
-var j1 = /* @__PURE__ */ ((e) => (e[e.LockCopy = -16384] = "LockCopy", e[e.LockPrint = -8192] = "LockPrint", e[e.Deny = -4096] = "Deny", e[e.OnlyUpload = -1024] = "OnlyUpload", e[e.FreeBusy = -64] = "FreeBusy", e[e.Read = 0] = "Read", e[e.Comment = 1] = "Comment", e[e.Review = 2] = "Review", e[e.Write = 4] = "Write", e[e.Delete = 8] = "Delete", e[e.FullInternal = 256] = "FullInternal", e[e.Full = 512] = "Full", e[e.Lock = 4096] = "Lock", e))(j1 || {}), k1 = /* @__PURE__ */ ((e) => (e[e.SingleCall = 0] = "SingleCall", e[e.FiveMinutes = 1] = "FiveMinutes", e[e.OneHour = 2] = "OneHour", e[e.Day = 3] = "Day", e[e.Week = 4] = "Week", e[e.Month = 5] = "Month", e[e.Year = 6] = "Year", e[e.Unlimited = 10] = "Unlimited", e[e.Internal = 11] = "Internal", e))(k1 || {});
+var k1 = /* @__PURE__ */ ((e) => (e[e.LockCopy = -16384] = "LockCopy", e[e.LockPrint = -8192] = "LockPrint", e[e.Deny = -4096] = "Deny", e[e.OnlyUpload = -1024] = "OnlyUpload", e[e.FreeBusy = -64] = "FreeBusy", e[e.Read = 0] = "Read", e[e.Comment = 1] = "Comment", e[e.Review = 2] = "Review", e[e.Write = 4] = "Write", e[e.Delete = 8] = "Delete", e[e.FullInternal = 256] = "FullInternal", e[e.Full = 512] = "Full", e[e.Lock = 4096] = "Lock", e))(k1 || {}), j1 = /* @__PURE__ */ ((e) => (e[e.SingleCall = 0] = "SingleCall", e[e.FiveMinutes = 1] = "FiveMinutes", e[e.OneHour = 2] = "OneHour", e[e.Day = 3] = "Day", e[e.Week = 4] = "Week", e[e.Month = 5] = "Month", e[e.Year = 6] = "Year", e[e.Unlimited = 10] = "Unlimited", e[e.Internal = 11] = "Internal", e))(j1 || {});
 const L1 = {
   id: "",
   sortField: f1.Id,
@@ -1016,43 +1053,43 @@ function H2({
   onCreateLink: o,
   locale: a = "en"
 }) {
-  const [u, g] = Z(L1), [r, y] = Z(null), [_, b] = Z(null), [A, G] = Z(!1), [j, B] = Z([]), [D, z] = Z([]), [r1, k] = Z(!1), a1 = n1("(max-width: 640px)"), R = e1(() => _ ? [..._.Directory.Items, ..._.Document.Items] : [...(r == null ? void 0 : r.Children) ?? [], ...(r == null ? void 0 : r.Documents) ?? []], [r, _]), F = e1(
+  const [u, g] = F(L1), [r, y] = F(null), [S, b] = F(null), [A, G] = F(!1), [k, B] = F([]), [D, z] = F([]), [r1, j] = F(!1), a1 = n1("(max-width: 640px)"), R = e1(() => S ? [...S.Directory.Items, ...S.Document.Items] : [...(r == null ? void 0 : r.Children) ?? [], ...(r == null ? void 0 : r.Documents) ?? []], [r, S]), Z = e1(
     () => {
-      let m = R.filter((h) => j.includes(h.Id));
+      let m = R.filter((h) => k.includes(h.Id));
       const x = m.map((h) => h.Id), E = D.filter((h) => !x.includes(h.Id));
       return E.length && (m = [...E, ...m]), m;
     },
-    [R, j, D]
+    [R, k, D]
   ), I = e1(
-    () => F.reduce((m, x) => m + x.Size, 0),
-    [F]
-  ), J = p + I > C, S = S1(
+    () => Z.reduce((m, x) => m + x.Size, 0),
+    [Z]
+  ), J = p + I > C, _ = _1(
     async (m) => {
-      k(!0);
+      j(!0);
       try {
         const { data: x } = await M1(m);
         y(x[0]), b(null);
       } finally {
-        k(!1);
+        j(!1);
       }
     },
     []
   ), $ = async (m) => {
     if (!m)
-      await S(u), G(!1);
+      await _(u), G(!1);
     else {
-      G(!0), k(!0);
+      G(!0), j(!0);
       try {
         const { data: x } = await E2({ text: m });
         b(x), y(null);
       } finally {
-        k(!1);
+        j(!1);
       }
     }
   }, q = async () => {
     var x, E;
-    k(!0);
-    const m = F;
+    j(!0);
+    const m = Z;
     try {
       const P = (await Promise.all(
         m.map(
@@ -1071,17 +1108,17 @@ function H2({
         ((E = (x = h.response) == null ? void 0 : x.data) == null ? void 0 : E.ErrorMessage) ?? "Неизвестная ошибка"
       );
     } finally {
-      k(!1);
+      j(!1);
     }
   }, i1 = async () => {
-    k(!0);
+    j(!0);
     try {
       const m = await Promise.all(
-        F.map(
+        Z.map(
           (x) => T2({
             id: x.Id,
-            accessType: j1.Read,
-            lifeTime: k1.Unlimited,
+            accessType: k1.Read,
+            lifeTime: j1.Unlimited,
             type: "Document"
           })
         )
@@ -1089,14 +1126,14 @@ function H2({
       o(
         m.map((x, E) => ({
           link: x.data,
-          item: F[E]
+          item: Z[E]
         }))
       ), c();
     } finally {
-      k(!1);
+      j(!1);
     }
   };
-  return Z1(() => {
+  return F1(() => {
     if (e)
       return (async () => {
         const h = {
@@ -1106,11 +1143,11 @@ function H2({
           sortField: f1.Id,
           sortOrder: u1.Desc
         };
-        g(h), S(h);
+        g(h), _(h);
       })(), () => {
         g(L1), y(null), b(null), B([]), z([]);
       };
-  }, [e, S]), /* @__PURE__ */ l.jsx(B1, { theme: { fontFamily: "Roboto, sans-serif" }, children: /* @__PURE__ */ l.jsx(
+  }, [e, _]), /* @__PURE__ */ l.jsx(B1, { theme: { fontFamily: "Roboto, sans-serif" }, children: /* @__PURE__ */ l.jsx(
     z1,
     {
       centered: !0,
@@ -1129,11 +1166,11 @@ function H2({
           {
             directory: r,
             isSearch: A,
-            onBack: () => S({
+            onBack: () => _({
               ...u,
               id: r.ParentId
             }),
-            onItemClick: (m) => S({ ...u, id: m }),
+            onItemClick: (m) => _({ ...u, id: m }),
             locale: a
           }
         ),
@@ -1141,14 +1178,14 @@ function H2({
           C1,
           {
             style: {
-              height: `calc(100% - 48px - 64px - ${j.length ? 76 : 0}px  + ${a1 ? 16 : 0}px - ${J ? 61 : 0}px)`
+              height: `calc(100% - 48px - 64px - ${k.length ? 76 : 0}px  + ${a1 ? 16 : 0}px - ${J ? 61 : 0}px)`
             },
             children: /* @__PURE__ */ l.jsx(
               v2,
               {
                 rows: R,
-                selectedRowIds: j,
-                onOpenDir: (m) => S({ ...u, id: m }),
+                selectedRowIds: k,
+                onOpenDir: (m) => _({ ...u, id: m }),
                 onSelect: (m) => {
                   B(m);
                   const x = R == null ? void 0 : R.map((h) => h.Id), E = D.filter((h) => !x.includes(h.Id));
@@ -1159,11 +1196,11 @@ function H2({
             )
           }
         ),
-        !!j.length && /* @__PURE__ */ l.jsx(
+        !!k.length && /* @__PURE__ */ l.jsx(
           M2,
           {
             enabledLinks: s,
-            count: j.length,
+            count: k.length,
             size: T1(I, 2, a),
             isLimitExceeded: J,
             onClose: () => {

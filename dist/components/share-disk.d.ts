@@ -6,7 +6,7 @@ export interface ShareDiskProps {
     maxSizeAttachments?: number;
     onClose: () => void;
     onAttachFiles: (files: File[]) => void;
-    locale?: 'en' | 'ru';
+    locale?: 'en' | 'ru' | 'th';
     offsetSize?: number;
     onCreateLink: (items: {
         link: GenerateLinkResponse;
