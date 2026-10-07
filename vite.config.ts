@@ -3,6 +3,7 @@ import { resolve } from "path";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 import svgr from "vite-plugin-svgr";
+import basicSsl from "@vitejs/plugin-basic-ssl";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -37,13 +38,14 @@ export default defineConfig({
   plugins: [
     react(),
     svgr(),
+    basicSsl(),
     dts({ insertTypesEntry: true, tsconfigPath: "./tsconfig.app.json" }),
   ],
   server: {
     host: "share-disk-app.r7-office.ru",
     proxy: {
       "/api": {
-        target: "http://46.148.238.130:38033",
+        target: "https://cddisk-dev.r7-office.ru",
         rewrite: (path) => path.replace(/^\/api/, "/api"),
         cookieDomainRewrite: ".r7-office.ru",
         changeOrigin: false,
