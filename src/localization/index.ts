@@ -62,7 +62,7 @@ const info: DynamicLocale =
     }
 }
 
-export const localize = (locale: 'en' | 'ru' | undefined, section: string): string => {
+export const localize = (locale: 'en' | 'ru' | 'th' | undefined, section: string): string => {
     if (!locale) {
     const value = (info.ru as Record<string, string>)[section];
         return value || "";

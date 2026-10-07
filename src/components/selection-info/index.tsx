@@ -11,7 +11,7 @@ export interface SelectionInfoProps {
   onClose: () => void;
   onAttachFiles: () => void;
   onCreateLink: () => void;
-  locale?: 'en' | 'ru';
+  locale?: 'en' | 'ru' | 'th';
 }
 
 export function SelectionInfo({

@@ -11,7 +11,7 @@ import { localize } from "@/localization";
 export interface HeaderProps {
   onSearch: (value: string) => void;
   onClose: () => void;
-  locale?: 'en' | 'ru';
+  locale?: 'en' | 'ru' | 'th';
 }
 
 export function Header({ onSearch, onClose, locale }: HeaderProps) {
