@@ -59,6 +59,34 @@ const info: DynamicLocale =
         fileDepot: 'Хранилище файлов',
         rooms: 'Комнаты',
         room: 'Комната'
+    },
+    th: {
+        MyDocuments: 'เอกสารของฉัน',
+        Search: 'ค้นหา',
+        Find: 'ค้นหา',
+        SearchResults: 'ผลการค้นหา',
+        ColumnName: 'ชื่อ',
+        ColumnChanged: 'แก้ไขเมื่อ',
+        ColumnSize: 'ขนาด',
+        MaxSizeLimitPartOne: 'ขนาดรวมของไฟล์ที่ส่งเกินขีดจำกัดปัจจุบัน (25 MB)',
+        MaxSizeLimitPartTwo: 'สามารถส่งไฟล์เป็นลิงก์ไปยัง R7-Disk ได้',
+        FilesSelected: 'ไฟล์ที่เลือก',
+        AttachFile: 'แนบไฟล์',
+        AttachFiles: 'แนบไฟล์',
+        AddLink: 'เพิ่มลิงก์',
+        AddLinks: 'เพิ่มลิงก์',
+        docs: 'เอกสารของฉัน',
+        sharedToMe: 'แชร์กับฉัน',
+        sharedAccess: 'การเข้าถึงที่แชร์',
+        favorites: 'รายการโปรด',
+        common: 'ส่วนกลาง',
+        recycleBin: 'ถังขยะ',
+        globalRecycleBin: 'ถังขยะส่วนกลาง',
+        recent: 'ล่าสุด',
+        link: 'ลิงก์',
+        fileDepot: 'คลังไฟล์',
+        rooms: 'ห้อง',
+        room: 'ห้อง'
     }
 }
 
