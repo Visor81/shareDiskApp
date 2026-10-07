@@ -1,4 +1,4 @@
-export const formatBytes = (bytes: number, decimals = 2, locale: 'ru' | 'en') => {
+export const formatBytes = (bytes: number, decimals = 2, locale: 'ru' | 'en' | 'th') => {
   if (!+bytes) return locale === "en" ? "0 B" : "0 Б";
 
   const k = 1024;
@@ -8,5 +8,5 @@ export const formatBytes = (bytes: number, decimals = 2, locale: 'ru' | 'en') =>
 
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${locale === "en" ? sizesEn[i] : sizes[i]}`;
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${locale === "en" || locale === 'th' ? sizesEn[i] : sizes[i]}`;
 };
